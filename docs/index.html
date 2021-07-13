@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Definición del Lenguaje R &mdash; documentación de Definición del Lenguaje R - 0.0.1</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="1. Introducción" href="Notas/01-introduccion.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> Definición del Lenguaje R
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Notas/01-introduccion.html">1. Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/02-objetos.html">2. Objetos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/03-evaluacion-de-expresiones.html">3. Evaluación de expresiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/04-funciones.html">4. Funciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/05-programacion-orientada-a-objetos.html">5. Programación Orientada a Objetos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/06-computacion-en-el-lenguaje.html">6. Computación en el Lenguaje</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/07-interfaces-del-sistema-y-de-idiomas-extranjeros.html">7. Interfaz del sistema y de idiomas extranjeros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/08-manejo-de-excepciones.html">8. Manejo de excepciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/09-debugging.html">9. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/10-parser.html">10. Parser</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Definición del Lenguaje R</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Definición del Lenguaje R</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/index.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="definicion-del-lenguaje-r">
+<h1>Definición del Lenguaje R<a class="headerlink" href="#definicion-del-lenguaje-r" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Notas/01-introduccion.html">1. Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/02-objetos.html">2. Objetos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Notas/02-objetos.html#tipos-basicos">2.1. Tipos Básicos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#vectores">2.1.1. Vectores</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#listas">2.1.2. Listas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#objetos-de-lenguaje">2.1.3. Objetos de lenguaje</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#objetos-de-expresion">2.1.4. Objetos de expresión</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#null">2.1.5. NULL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#dot-dot-dot">2.1.6. Dot-dot-dot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#environments">2.1.7. Environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#objetos-integrados-y-formas-especiales">2.1.8. Objetos integrados y formas especiales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#objetos-promesa">2.1.9. Objetos Promesa</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#objetos-pairlist">2.1.10. Objetos Pairlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#el-tipo-any">2.1.11. El tipo «Any»</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/02-objetos.html#atributos">2.2. Atributos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#names">2.2.1. Names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#dimensions">2.2.2. Dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#dimnames">2.2.3. Dimnames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#clases">2.2.4. Clases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#time-series-attributes">2.2.5. Time series attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#copying-of-attributes">2.2.6. Copying of attributes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/02-objetos.html#objetos-compuestos-especiales">2.3. Objetos compuestos especiales</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#factores">2.3.1. Factores</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/02-objetos.html#objetos-dataframe">2.3.2. Objetos DataFrame</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/03-evaluacion-de-expresiones.html">3. Evaluación de expresiones</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Notas/03-evaluacion-de-expresiones.html#evaluacion-simple">3.1. Evaluación simple</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Notas/03-evaluacion-de-expresiones.html#constantes">3.1.1. Constantes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/03-evaluacion-de-expresiones.html#busqueda-de-simbolo">3.2. Búsqueda de símbolo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/03-evaluacion-de-expresiones.html#llamada-a-funciones">3.3. Llamada a funciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/03-evaluacion-de-expresiones.html#operadores">3.4. Operadores</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/04-funciones.html">4. Funciones</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Notas/04-funciones.html#escritura-de-funciones">4.1. Escritura de Funciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/04-funciones.html#sintaxis-y-ejemplos">4.2. Sintaxis y ejemplos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/04-funciones.html#argumentos">4.3. Argumentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/04-funciones.html#funciones-como-objetos">4.4. Funciones como objetos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/04-funciones.html#evaluation">4.5. Evaluation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Notas/04-funciones.html#entorno-de-evaluacion">4.5.1. Entorno de evaluación</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Notas/04-funciones.html#coincidencia-de-argumentos">4.5.2. Coincidencia de argumentos</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/04-funciones.html#evaluacion-de-argumentos">4.6. Evaluación de argumentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/04-funciones.html#alcance">4.7. Alcance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/05-programacion-orientada-a-objetos.html">5. Programación Orientada a Objetos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/06-computacion-en-el-lenguaje.html">6. Computación en el Lenguaje</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/07-interfaces-del-sistema-y-de-idiomas-extranjeros.html">7. Interfaz del sistema y de idiomas extranjeros</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Notas/07-interfaces-del-sistema-y-de-idiomas-extranjeros.html#acceso-al-sistema-operativo">7.1. Acceso al sistema operativo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/07-interfaces-del-sistema-y-de-idiomas-extranjeros.html#interfaces-de-idiomas-extranjeros">7.2. Interfaces de idiomas extranjeros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/07-interfaces-del-sistema-y-de-idiomas-extranjeros.html#internal-y-primitive">7.3. .Internal y .Primitive</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/08-manejo-de-excepciones.html">8. Manejo de excepciones</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Notas/08-manejo-de-excepciones.html#stop">8.1. stop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/08-manejo-de-excepciones.html#warning">8.2. warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/08-manejo-de-excepciones.html#on-exit">8.3. on.exit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/08-manejo-de-excepciones.html#opciones-de-error">8.4. Opciones de error</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/09-debugging.html">9. Debugging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Notas/09-debugging.html#browser">9.1. browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/09-debugging.html#debug-undebug">9.2. debug/undebug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/09-debugging.html#trace-untrace">9.3. trace/untrace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notas/09-debugging.html#traceback">9.4. traceback</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Notas/10-parser.html">10. Parser</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="Notas/01-introduccion.html" class="btn btn-neutral float-right" title="1. Introducción" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Derechos de autor 2021, Ferreira, Juan David.
+
+    </p>
+  </div>
+    
+    
+    
+    Construido con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

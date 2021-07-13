@@ -1,0 +1,56 @@
+Interfaz del sistema y de idiomas extranjeros
+===============================================
+
+Acceso al sistema operativo
+----------------------------------
+
+El acceso al shell del sistema operativo se realiza a través del sistema de funciones R. Los detalles difieren según la plataforma (consulte la ayuda en línea), y todo lo que se puede asumir con seguridad es que el primer argumento será un comando de cadena que se pasará para su ejecución (no necesariamente mediante un shell) y el segundo argumento será interno que, si es verdadero, recopilará la salida del comando en un vector de caracteres R.
+
+Las funciones ``system.time`` y ``proc.time`` están disponibles para cronometraje (aunque la información disponible puede estar limitada en plataformas que no son tipo Unix).
+
+Se puede acceder y manipular la información del entorno del sistema operativo con::
+
+    Sys.getenv                    variables de entorno del Sistema operativo
+    Sys.putenv
+    Sys.getlocale                 Localización del Sistema
+    Sys.putlocale
+    Sys.localeconv
+    Sys.time                      Tiempo actual
+    Sys.timezone                  Zona horaria
+
+
+Se proporciona un conjunto uniforme de funciones de acceso a fie en todas las plataformas::
+
+    file.access                    Determine la accesibilidad del archivo
+    file.append                    Concatenar archivos
+    file.choose                    Solicitar al usuario el nombre del archivo
+    file.copy                      Copiar archivos
+    file.create                    Crear o truncar archivos
+    file.exists                    Prueba de existencia
+    file.info                      Información de archivo miscelánea
+    file.remove                    Eliminar archivos
+    file.rename                    Renombrar archivos
+    file.show                      Mostrar un archivo de texto
+    unlink                         Elimina archivos o directorios.
+
+    
+También hay funciones para manipular los nombres de los archivos y las rutas de forma independiente de la plataforma.
+
+.. code-block::
+
+    basename                         Nombre de archivo sin directorio
+    dirname                          Nombre del directorio
+    file.path                        Construir ruta al archivo
+    path.expand                      Expandir ~ en la ruta de Unix
+
+Interfaces de idiomas extranjeros
+----------------------------------
+
+Consulte la Sección "Interfaces del sistema y de idiomas extranjeros" en Escritura de extensiones de R para obtener detalles sobre cómo agregar funcionalidad a R mediante código compilado. Las funciones ``.C`` y ``.Fortran`` proporcionan una interfaz estándar para el código compilado que se ha vinculado a R, ya sea en el momento de la compilación o mediante ``dyn.load``. Están pensados ​​principalmente para código C y FORTRAN compilado respectivamente, pero la función .C se puede usar con otros lenguajes que pueden generar interfaces C, por ejemplo C++.
+
+Las funciones ``.Call`` y ``.External`` proporcionan interfaces que permiten que el código compilado (principalmente código C compilado) manipule objetos R.
+
+.Internal y .Primitive
+---------------------------
+
+Las interfaces ``.Internal`` y ``.Primitive`` se utilizan para llamar al código C compilado en R en el momento de la compilación. Consulte la sección "``.Internal`` vs ``.Primitive``" en R ``Internals``.

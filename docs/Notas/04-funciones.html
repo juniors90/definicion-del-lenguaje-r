@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>4. Funciones &mdash; documentación de Definición del Lenguaje R - 0.0.1</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="5. Programación Orientada a Objetos" href="05-programacion-orientada-a-objetos.html" />
+    <link rel="prev" title="3. Evaluación de expresiones" href="03-evaluacion-de-expresiones.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Definición del Lenguaje R
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01-introduccion.html">1. Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-objetos.html">2. Objetos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-evaluacion-de-expresiones.html">3. Evaluación de expresiones</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Funciones</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#escritura-de-funciones">4.1. Escritura de Funciones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sintaxis-y-ejemplos">4.2. Sintaxis y ejemplos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#argumentos">4.3. Argumentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#funciones-como-objetos">4.4. Funciones como objetos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluation">4.5. Evaluation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#entorno-de-evaluacion">4.5.1. Entorno de evaluación</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coincidencia-de-argumentos">4.5.2. Coincidencia de argumentos</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluacion-de-argumentos">4.6. Evaluación de argumentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alcance">4.7. Alcance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="05-programacion-orientada-a-objetos.html">5. Programación Orientada a Objetos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-computacion-en-el-lenguaje.html">6. Computación en el Lenguaje</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-interfaces-del-sistema-y-de-idiomas-extranjeros.html">7. Interfaz del sistema y de idiomas extranjeros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-manejo-de-excepciones.html">8. Manejo de excepciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-debugging.html">9. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-parser.html">10. Parser</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Definición del Lenguaje R</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">4. </span>Funciones</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Notas/04-funciones.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="funciones">
+<h1><span class="section-number">4. </span>Funciones<a class="headerlink" href="#funciones" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="escritura-de-funciones">
+<h2><span class="section-number">4.1. </span>Escritura de Funciones<a class="headerlink" href="#escritura-de-funciones" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Si bien R puede ser muy útil como análisis de datos para la mayoría de los usuarios, rápidamente se les ocurre querer escribir sus propias funciones. Esta es una de las ventajas reales de R. Los usuarios pueden programarlo y pueden, si lo desean, cambiar las funciones de nivel del sistema a funciones que encuentran más apropiadas.</p>
+<p>R también proporciona instalaciones que facilitan la realización de las funciones que haya creado. D. Consulte la sección «Escritura de documentación de R» en Escritura de extensiones de R.</p>
+</div>
+<div class="section" id="sintaxis-y-ejemplos">
+<h2><span class="section-number">4.2. </span>Sintaxis y ejemplos<a class="headerlink" href="#sintaxis-y-ejemplos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>La sintaxis para escribir una función es</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">function</span><span class="p">(</span><span class="n">arglist</span><span class="p">)</span> <span class="n">body</span>
+</pre></div>
+</div>
+<p>El primer componente de la declaración de función es la palabra clave función que le indica a R que desea crear una función.</p>
+<p>Una lista de argumentos es una lista de argumentos formales separados por comas. Un argumento formal puede ser un símbolo, una declaración de la forma «símbolo = expresión» o el argumento formal especial <code class="docutils literal notranslate"><span class="pre">...</span></code>.</p>
+<ul class="simple">
+<li><p>El cuerpo puede ser cualquier expresión R válida.</p></li>
+<li><p>El cuerpo es un grupo de expresiones contenidas entre llaves («<code class="docutils literal notranslate"><span class="pre">{</span></code>» y «<code class="docutils literal notranslate"><span class="pre">}</span></code>»).</p></li>
+<li><p>Las funciones se asignan a símbolos, pero no es necesario.</p></li>
+</ul>
+<p>El valor devuelto por la llamada a la función es una función.</p>
+<p>Si no se le asigna un nombre, se denomina función anónima. Las funciones anónimas se utilizan con mayor frecuencia como argumentos para otras funciones, como la familia de aplicación o externa.</p>
+<p>Aquí hay una función simple: <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&lt;-</span> <span class="pre">function(x)</span> <span class="pre">print(x)</span></code>. Entonces echo es una función que toma un solo argumento y cuando se invoca <code class="docutils literal notranslate"><span class="pre">echo</span></code> imprime su argumento.</p>
+</div>
+<div class="section" id="argumentos">
+<h2><span class="section-number">4.3. </span>Argumentos<a class="headerlink" href="#argumentos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Los argumentos formales de la función desafían las variables cuyos valores se proporcionarán en el momento en que se invoca la función. Los nombres de estos argumentos se pueden usar dentro del cuerpo de la función donde obtienen el valor proporcionado en el momento de la invocación de la función.</p>
+<p>Los valores predeterminados para los argumentos se pueden especificar usando la forma especial «nombre = expresión».
+En este caso, si el usuario no especifica un valor para el argumento cuando se invoca la función, la expresión se asociará con el símbolo correspondiente. Cuando se necesita un valor, la expresión se evalúa en el marco de evaluación de la función.</p>
+<p>Los comportamientos predeterminados también se pueden especificar utilizando la función que falta. Cuando se llama a missing con el nombre de un argumento formal, devuelve <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> si el argumento formal no coincide con ningún argumento real y no se ha modificado posteriormente en el cuerpo de la función. Por lo tanto, un argumento que falte tendrá su valor predeterminado, si lo hubiera. La función que falta no fuerza la evaluación del argumento.</p>
+<p>El tipo especial de argumento <code class="docutils literal notranslate"><span class="pre">...</span></code> puede contener cualquier número de argumentos proporcionados. Se utiliza para una variedad de propósitos. Le permite escribir una función que toma un número arbitrario de argumentos. Puede usarse para absorber algunos argumentos en una función intermedia que luego puede ser extraída por funciones llamadas posteriormente.</p>
+</div>
+<div class="section" id="funciones-como-objetos">
+<h2><span class="section-number">4.4. </span>Funciones como objetos<a class="headerlink" href="#funciones-como-objetos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Las funciones son objetos de primera clase en R. Se pueden usar en cualquier lugar donde se requiera un objeto R. En particular, pueden pasarse como argumentos a funciones y devolverse como valores de funciones. Consulte la Sección 2.1.5 [Objetos de función], página 4, para obtener más detalles. Capítulo 4: Funciones 23.</p>
+</div>
+<div class="section" id="evaluation">
+<h2><span class="section-number">4.5. </span>Evaluation<a class="headerlink" href="#evaluation" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="entorno-de-evaluacion">
+<h3><span class="section-number">4.5.1. </span>Entorno de evaluación<a class="headerlink" href="#entorno-de-evaluacion" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Cuando se llama o invoca una función, se crea un nuevo marco de evaluación. En este marco, los argumentos formales se emparejan con los argumentos proporcionados de acuerdo con las reglas dadas en la Sección 4.3.2 [Coincidencia de argumentos], página 23. Las declaraciones en el cuerpo de la función se evalúan secuencialmente en este marco de entorno.</p>
+<p>El marco adjunto del marco de evaluación es el marco de entorno asociado con la función que se invoca. Esto puede ser diferente de S. Aunque muchas funciones tienen .GlobalEnv como su entorno, esto no tiene que ser cierto y las funciones desafiadas en paquetes con espacios de nombres (normalmente) tienen el espacio de nombres del paquete como su entorno.</p>
+</div>
+<div class="section" id="coincidencia-de-argumentos">
+<h3><span class="section-number">4.5.2. </span>Coincidencia de argumentos<a class="headerlink" href="#coincidencia-de-argumentos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Esta subsección se aplica a los cierres pero no a las funciones primitivas. Estos últimos normalmente ignoran las etiquetas y hacen coincidencias posicionales, pero se deben consultar sus páginas de ayuda para conocer las excepciones, que incluyen <code class="docutils literal notranslate"><span class="pre">log</span></code>, <code class="docutils literal notranslate"><span class="pre">round</span></code>, <code class="docutils literal notranslate"><span class="pre">signif</span></code>, <code class="docutils literal notranslate"><span class="pre">rep</span></code> y <code class="docutils literal notranslate"><span class="pre">seq.int</span></code>.</p>
+<p>Lo primero que ocurre en la evaluación de una función es la coincidencia de los argumentos formales con los reales o suministrados. Esto se hace mediante un proceso de tres pasos:</p>
+<ol class="arabic simple">
+<li><p>Coincidencia exacta en etiquetas. Para cada argumento proporcionado con nombre, se busca en la lista de argumentos formales un elemento cuyo nombre coincida exactamente. Es un error que el mismo argumento formal coincida con varios valores reales o viceversa.</p></li>
+<li><p>Coincidencia parcial de etiquetas. Cada argumento proporcionado con nombre restante se compara con los argumentos formales restantes mediante una coincidencia parcial. Si el nombre del argumento proporcionado coincide exactamente con la primera parte de un argumento formal, se considera que los dos argumentos coinciden. Es un error tener múltiples coincidencias parciales. Observe que si <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">&lt;-</span> <span class="pre">function(fumble,</span> <span class="pre">fooey)</span> <span class="pre">fbody</span></code>, entonces <code class="docutils literal notranslate"><span class="pre">f(f</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">fo</span> <span class="pre">=</span> <span class="pre">2)</span></code> es ilegal, aunque el segundo argumento real solo coincide con <code class="docutils literal notranslate"><span class="pre">fooey</span></code>. Sin embargo, <code class="docutils literal notranslate"><span class="pre">f(f</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">fooey</span> <span class="pre">=</span> <span class="pre">2)</span></code> es legal, ya que el segundo argumento coincide exactamente y se elimina de la consideración de coincidencia parcial. Si los argumentos formales contienen <code class="docutils literal notranslate"><span class="pre">...</span></code> entonces la coincidencia parcial solo se aplica a los argumentos que la preceden.</p></li>
+<li><p>Emparejamiento posicional. Cualquier argumento formal que no coincida está vinculado a argumentos proporcionados sin nombre, en orden. Si hay un argumento <code class="docutils literal notranslate"><span class="pre">...</span></code>, tomará los argumentos restantes, etiquetados o no.</p></li>
+</ol>
+<p>Si alguno de los argumentos no coincide, se declara un error. La coincidencia de argumentos se ve aumentada por las funciones match.arg, match.call y match.fun. El acceso al algoritmo de coincidencia parcial utilizado por R se realiza a través de pmatch.</p>
+</div>
+</div>
+<div class="section" id="evaluacion-de-argumentos">
+<h2><span class="section-number">4.6. </span>Evaluación de argumentos<a class="headerlink" href="#evaluacion-de-argumentos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Una de las cosas más importantes que debe saber sobre la evaluación de argumentos para una función es que los argumentos proporcionados y los argumentos predeterminados se tratan de manera diferente. Los argumentos proporcionados a una función se evalúan en el marco de evaluación de la función que realiza la llamada. Los argumentos predeterminados de una función se evalúan en el marco de evaluación de la función.</p>
+<p>La semántica de invocar una función en un argumento R es llamada por valor. En general, los argumentos proporcionados se comportan como si fueran variables locales inicializadas con el valor proporcionado y el nombre del argumento formal correspondiente. Cambiar el valor de un argumento proporcionado dentro de una función no afectará el valor de la variable en el marco de llamada.</p>
+<p>R tiene una forma de evaluación perezosa de argumentos de función. Los argumentos no se evalúan hasta que se necesitan. Es importante darse cuenta de que en algunos casos el argumento nunca será evaluado. Por lo tanto, es de mal estilo usar argumentos en funciones para causar efectos secundarios. Mientras que en C es común que el Capítulo 4: Funciones 24 use la forma, foo (x = y) para invocar a foo con el valor de y y simultáneamente para asignar el valor de y a x, este mismo estilo no debe usarse en R. No hay garantía de que el argumento se evalúe alguna vez y, por lo tanto, es posible que la asignación no se lleve a cabo.</p>
+<p>También vale la pena señalar que el efecto de <code class="docutils literal notranslate"><span class="pre">foo(x</span> <span class="pre">&lt;-</span> <span class="pre">y)</span></code> si se evalúa el argumento es cambiar el valor de x en el entorno de llamada y no en el entorno de evaluación de foo.</p>
+<p>Es posible acceder a las expresiones reales (no predeterminadas) utilizadas como argumentos dentro de la función. El mecanismo se implementa a través de promesas. Cuando se evalúa una función, la expresión real utilizada como argumento se almacena en la promesa junto con un puntero al entorno desde el que se llamó a la función. Cuando (si) se evalúa el argumento, la expresión almacenada se evalúa en el entorno desde el que se llamó a la función. Dado que solo se utiliza un puntero al entorno, cualquier cambio realizado en ese entorno entrará en vigor durante esta evaluación. El valor resultante también se almacena en un lugar separado en la promesa.</p>
+<p>Las evaluaciones posteriores recuperan este valor almacenado (no se lleva a cabo una segunda evaluación). El acceso a la expresión no evaluada también está disponible usando sustituto.</p>
+<p>Cuando se llama a una función, a cada argumento formal se le asigna una promesa en el entorno local de la llamada con el espacio de expresión que contiene el argumento real (si existe) y el espacio de entorno que contiene el entorno del llamador. Si no se proporciona ningún argumento real para un argumento formal en la llamada y hay una expresión predeterminada, se asigna de manera similar al espacio de expresión del argumento formal, pero con el entorno establecido en el entorno local.</p>
+<p>El proceso de archivar el espacio de valor de una promesa mediante la evaluación del contenido del espacio de expresión en el entorno de la promesa se llama forzar la promesa. Una promesa solo se forzará una vez, y el contenido de la ranura de valor se utilizará directamente más adelante.</p>
+<p>Una promesa es forzada cuando se necesita su valor. Esto suele suceder dentro de las funciones internas, pero una promesa también puede forzarse mediante la evaluación directa de la promesa en sí. En ocasiones, esto es útil cuando una expresión predeterminada depende del valor de otro argumento formal u otra variable en el entorno local. Esto se ve en el siguiente ejemplo, donde la etiqueta única asegura que la etiqueta se basa en el valor de x antes de que se cambie en la siguiente línea.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">deparse</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">label</span>
+    <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>El espacio de expresión de una promesa puede implicar en sí mismo otras promesas. Esto sucede siempre que un argumento no evaluado se pasa como argumento a otra función. Al forzar una promesa, otras promesas en su expresión también se forzarán de forma recursiva a medida que se evalúen.</p>
+</div>
+<div class="section" id="alcance">
+<h2><span class="section-number">4.7. </span>Alcance<a class="headerlink" href="#alcance" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>El alcance o las reglas de determinación del alcance son simplemente el conjunto de reglas que utiliza el evaluador para determinar un valor para un símbolo. Cada lenguaje de computadora tiene un conjunto de tales reglas. En R, las reglas son bastante simples, pero existen mecanismos para subvertir las reglas habituales o predeterminadas.</p>
+<p>R se adhiere a un conjunto de reglas que se denominan alcance léxico. Esto significa que las vinculaciones de variables vigentes en el momento en que se creó la expresión se utilizan para proporcionar valores para cualquier símbolo no vinculado en la expresión.</p>
+<p>La mayoría de las propiedades interesantes del alcance están relacionadas con la evaluación de funciones y nos concentramos en este tema. Un símbolo puede estar ligado o no ligado. Todos los argumentos formales de una función proporcionan símbolos enlazados en el cuerpo de la función. Cualquier otro símbolo en el cuerpo de la función son variables locales o variables independientes. Una variable local es aquella que se desafía dentro de la función. Debido a que R no tiene una definición formal de variables, simplemente se usan según sea necesario, puede ser difícil determinar si una variable es local o no. Las variables locales 25 deben ser desafiadas, esto generalmente se hace colocándolas en el lado izquierdo de una asignación.</p>
+<p>Durante el proceso de evaluación, si se detecta un símbolo no vinculado, R intenta encontrar un valor para él. Las reglas de determinación del alcance determinan cómo se desarrolla este proceso. En R se busca primero el entorno de la función, luego su recinto y así sucesivamente hasta alcanzar el entorno global.</p>
+<p>El entorno global encabeza una lista de búsqueda de entornos que se buscan secuencialmente en busca de un símbolo coincidente. Luego se usa el valor del primer partido.</p>
+<p>Cuando este conjunto de reglas se combina con el hecho de que las funciones pueden devolverse como valores de otras funciones, se obtienen algunas propiedades más bien agradables, pero a primera vista, peculiares.</p>
+<p>A simple example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">y</span> <span class="o">&lt;-</span> <span class="mi">10</span>
+    <span class="n">g</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">h</span> <span class="o">&lt;-</span> <span class="n">f</span><span class="p">()</span>
+<span class="n">h</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Una pregunta bastante interesante es qué sucede cuando se evalúa <code class="docutils literal notranslate"><span class="pre">h</span></code>. Cuando se evalúa el cuerpo de una función, no hay problema para determinar valores para variables locales o para variables ligadas.</p>
+<p>Las reglas de alcance determinan cómo el lenguaje determinará los valores de las variables independientes.</p>
+<p>Cuando se evalúa <code class="docutils literal notranslate"><span class="pre">h(3)</span></code> vemos que su cuerpo es el de <code class="docutils literal notranslate"><span class="pre">g</span></code>. Dentro de ese cuerpo, <code class="docutils literal notranslate"><span class="pre">x</span></code> está vinculado al argumento formal <code class="docutils literal notranslate"><span class="pre">e</span></code> y no está vinculado. En un lenguaje con alcance léxico, <code class="docutils literal notranslate"><span class="pre">x</span></code> se asociará con el valor <code class="docutils literal notranslate"><span class="pre">3</span></code> e <code class="docutils literal notranslate"><span class="pre">y</span></code> con el valor local de <code class="docutils literal notranslate"><span class="pre">10</span></code> a <code class="docutils literal notranslate"><span class="pre">f</span></code>, por lo que <code class="docutils literal notranslate"><span class="pre">h(3)</span></code> debería devolver el valor <code class="docutils literal notranslate"><span class="pre">13</span></code>. En R, esto es lo que sucede.</p>
+<p>En S, debido a las diferentes reglas de alcance, se obtendrá un error que indica que no se encuentra <code class="docutils literal notranslate"><span class="pre">y</span></code>, a menos que haya una variable <code class="docutils literal notranslate"><span class="pre">y</span></code> en su espacio de trabajo, en cuyo caso se usará su valor.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="05-programacion-orientada-a-objetos.html" class="btn btn-neutral float-right" title="5. Programación Orientada a Objetos" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="03-evaluacion-de-expresiones.html" class="btn btn-neutral float-left" title="3. Evaluación de expresiones" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Derechos de autor 2021, Ferreira, Juan David.
+
+    </p>
+  </div>
+    
+    
+    
+    Construido con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

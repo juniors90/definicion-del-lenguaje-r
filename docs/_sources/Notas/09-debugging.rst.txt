@@ -1,0 +1,110 @@
+Debugging
+==========
+
+
+La depuración del código siempre ha sido un arte. R proporciona varias herramientas que ayudan a los usuarios a encontrar problemas en su código. Estas herramientas detienen la ejecución en puntos particulares del código y se puede inspirar el estado actual de la computación.
+
+La mayor parte de la depuración se realiza mediante llamadas al ``browser`` o ``debug``. Ambas funciones se basan en el mismo mecanismo interno y ambas proporcionan al usuario un mensaje especial. Se puede escribir cualquier comando en el indicador. El entorno de evaluación del comando es el entorno activo actualmente. Esto le permite examinar el estado actual de cualquier variable, etc. Hay comandos especiales que R interpreta de manera diferente. Ellos son,
+
+"``RET``"
+
+    Vaya a la siguiente declaración si la función se está depurando. Continuar con la ejecución si se invocó el navegador.
+
+
+"``C``"
+
+"``Cont``"
+    
+    Continúe la ejecución.
+
+"``N``"
+
+    Ejecuta la siguiente instrucción de la función. Esto también funciona desde el navegador.
+
+"``where``"
+
+    Muestra la pila de llamadas
+
+"``Q``"
+    
+    Detiene la ejecución y salta al nivel superior de inmediato.
+
+Si hay una variable local con el mismo nombre que uno de los comandos especiales enumerados anteriormente, se puede acceder a su valor mediante get. Una llamada a ``get`` con el nombre entre comillas recuperará el valor en el entorno actual.
+
+El depurador proporciona acceso solo a expresiones interpretadas. Si una función llama a un idioma extranjero (como C), no se proporciona acceso a las declaraciones en ese idioma. La ejecución se detendrá en la siguiente instrucción que se evalúe en R. Se puede usar un depurador simbólico como gdb para depurar código compilado.
+
+browser
+---------
+
+Una llamada al navegador de funciones hace que R detenga la ejecución en ese punto y proporcione al usuario un mensaje especial. Se ignoran los argumentos al navegador.
+
+.. code-block::
+    
+    > foo <- function(s) {
+    +    c <- 3
+    +    browser()
+    +   }
+    > foo(4)
+    Called from: foo(4)
+    Browse[1]> s
+    [1] 4
+    Browse[1]> get("c")
+    [1] 3
+    Browse[1]>
+
+debug/undebug
+-------------
+
+El depurador puede invocarse en cualquier función mediante el comando debug (fun). Posteriormente, cada vez que se evalúa esa función se invoca al depurador. El depurador le permite controlar la evaluación de las declaraciones en el cuerpo de la función. Antes de que se ejecute cada declaración, se imprime la declaración y se proporciona un mensaje especial. Se puede dar cualquier comando, los de la tabla anterior tienen un significado especial.
+
+La depuración se apaga mediante una llamada a undebug con la función como argumento.
+
+
+.. code-block:: R
+    
+    > debug(mean.default)
+    > mean(1:10)
+    debugging in: mean.default(1:10)
+    debug: {
+        if (na.rm)
+        x <- x[!is.na(x)]
+        trim <- trim[1]
+        n <- length(c(x, recursive = TRUE))
+        if (trim > 0) {
+            if (trim >= 0.5)
+            return(median(x, na.rm = FALSE))
+            lo <- floor(n * trim) + 1
+            hi <- n + 1 - lo
+            x <- sort(x, partial = unique(c(lo, hi)))[lo:hi]
+            n <- hi - lo + 1
+        }
+        sum(x)/n
+    }
+    Browse[1]>
+    debug: if (na.rm) x <- x[!is.na(x)]
+    Browse[1]>
+    debug: trim <- trim[1]
+    Browse[1]>
+    debug: n <- length(c(x, recursive = TRUE))
+    Browse[1]> c
+    exiting from: mean.default(1:10)
+    [1] 5.5
+
+trace/untrace
+---------------
+
+Otra forma de monitorear el comportamiento de R es a través del mecanismo de rastreo. trace se llama con un único argumento que es el nombre de la función que desea rastrear. No es necesario citar el nombre, pero para algunas funciones deberá citar el nombre para evitar un error de sintaxis.
+
+Cuando se ha invocado el rastreo en una función, cada vez que se evalúa esa función, se imprime su llamada. Este mecanismo se elimina llamando a untrace con la función como argumento.
+
+.. code-block:: R
+    
+    > trace("[<-")
+    > x <- 1:10
+    > x[3] <- 4
+    trace: "[<-"(*tmp*, 3, value = 4)
+
+traceback
+---------------
+
+Cuando un error ha provocado un salto al nivel superior, se coloca una variable especial llamada .Traceback en el entorno base. .Traceback es un vector de caracteres con una entrada para cada llamada de función que estaba activa en el momento en que ocurrió el error. Se puede realizar un examen de .Traceback mediante una llamada a traceback.

@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>7. Interfaz del sistema y de idiomas extranjeros &mdash; documentación de Definición del Lenguaje R - 0.0.1</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="8. Manejo de excepciones" href="08-manejo-de-excepciones.html" />
+    <link rel="prev" title="6. Computación en el Lenguaje" href="06-computacion-en-el-lenguaje.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Definición del Lenguaje R
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01-introduccion.html">1. Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-objetos.html">2. Objetos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-evaluacion-de-expresiones.html">3. Evaluación de expresiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-funciones.html">4. Funciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-programacion-orientada-a-objetos.html">5. Programación Orientada a Objetos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-computacion-en-el-lenguaje.html">6. Computación en el Lenguaje</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Interfaz del sistema y de idiomas extranjeros</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#acceso-al-sistema-operativo">7.1. Acceso al sistema operativo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interfaces-de-idiomas-extranjeros">7.2. Interfaces de idiomas extranjeros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#internal-y-primitive">7.3. .Internal y .Primitive</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="08-manejo-de-excepciones.html">8. Manejo de excepciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-debugging.html">9. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-parser.html">10. Parser</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Definición del Lenguaje R</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">7. </span>Interfaz del sistema y de idiomas extranjeros</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Notas/07-interfaces-del-sistema-y-de-idiomas-extranjeros.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="interfaz-del-sistema-y-de-idiomas-extranjeros">
+<h1><span class="section-number">7. </span>Interfaz del sistema y de idiomas extranjeros<a class="headerlink" href="#interfaz-del-sistema-y-de-idiomas-extranjeros" title="Enlazar permanentemente con este título">¶</a></h1>
+<div class="section" id="acceso-al-sistema-operativo">
+<h2><span class="section-number">7.1. </span>Acceso al sistema operativo<a class="headerlink" href="#acceso-al-sistema-operativo" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>El acceso al shell del sistema operativo se realiza a través del sistema de funciones R. Los detalles difieren según la plataforma (consulte la ayuda en línea), y todo lo que se puede asumir con seguridad es que el primer argumento será un comando de cadena que se pasará para su ejecución (no necesariamente mediante un shell) y el segundo argumento será interno que, si es verdadero, recopilará la salida del comando en un vector de caracteres R.</p>
+<p>Las funciones <code class="docutils literal notranslate"><span class="pre">system.time</span></code> y <code class="docutils literal notranslate"><span class="pre">proc.time</span></code> están disponibles para cronometraje (aunque la información disponible puede estar limitada en plataformas que no son tipo Unix).</p>
+<p>Se puede acceder y manipular la información del entorno del sistema operativo con:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Sys</span><span class="o">.</span><span class="n">getenv</span>                    <span class="n">variables</span> <span class="n">de</span> <span class="n">entorno</span> <span class="k">del</span> <span class="n">Sistema</span> <span class="n">operativo</span>
+<span class="n">Sys</span><span class="o">.</span><span class="n">putenv</span>
+<span class="n">Sys</span><span class="o">.</span><span class="n">getlocale</span>                 <span class="n">Localización</span> <span class="k">del</span> <span class="n">Sistema</span>
+<span class="n">Sys</span><span class="o">.</span><span class="n">putlocale</span>
+<span class="n">Sys</span><span class="o">.</span><span class="n">localeconv</span>
+<span class="n">Sys</span><span class="o">.</span><span class="n">time</span>                      <span class="n">Tiempo</span> <span class="n">actual</span>
+<span class="n">Sys</span><span class="o">.</span><span class="n">timezone</span>                  <span class="n">Zona</span> <span class="n">horaria</span>
+</pre></div>
+</div>
+<p>Se proporciona un conjunto uniforme de funciones de acceso a fie en todas las plataformas:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">file</span><span class="o">.</span><span class="n">access</span>                    <span class="n">Determine</span> <span class="n">la</span> <span class="n">accesibilidad</span> <span class="k">del</span> <span class="n">archivo</span>
+<span class="n">file</span><span class="o">.</span><span class="n">append</span>                    <span class="n">Concatenar</span> <span class="n">archivos</span>
+<span class="n">file</span><span class="o">.</span><span class="n">choose</span>                    <span class="n">Solicitar</span> <span class="n">al</span> <span class="n">usuario</span> <span class="n">el</span> <span class="n">nombre</span> <span class="k">del</span> <span class="n">archivo</span>
+<span class="n">file</span><span class="o">.</span><span class="n">copy</span>                      <span class="n">Copiar</span> <span class="n">archivos</span>
+<span class="n">file</span><span class="o">.</span><span class="n">create</span>                    <span class="n">Crear</span> <span class="n">o</span> <span class="n">truncar</span> <span class="n">archivos</span>
+<span class="n">file</span><span class="o">.</span><span class="n">exists</span>                    <span class="n">Prueba</span> <span class="n">de</span> <span class="n">existencia</span>
+<span class="n">file</span><span class="o">.</span><span class="n">info</span>                      <span class="n">Información</span> <span class="n">de</span> <span class="n">archivo</span> <span class="n">miscelánea</span>
+<span class="n">file</span><span class="o">.</span><span class="n">remove</span>                    <span class="n">Eliminar</span> <span class="n">archivos</span>
+<span class="n">file</span><span class="o">.</span><span class="n">rename</span>                    <span class="n">Renombrar</span> <span class="n">archivos</span>
+<span class="n">file</span><span class="o">.</span><span class="n">show</span>                      <span class="n">Mostrar</span> <span class="n">un</span> <span class="n">archivo</span> <span class="n">de</span> <span class="n">texto</span>
+<span class="n">unlink</span>                         <span class="n">Elimina</span> <span class="n">archivos</span> <span class="n">o</span> <span class="n">directorios</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>También hay funciones para manipular los nombres de los archivos y las rutas de forma independiente de la plataforma.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">basename</span>                         <span class="n">Nombre</span> <span class="n">de</span> <span class="n">archivo</span> <span class="n">sin</span> <span class="n">directorio</span>
+<span class="n">dirname</span>                          <span class="n">Nombre</span> <span class="k">del</span> <span class="n">directorio</span>
+<span class="n">file</span><span class="o">.</span><span class="n">path</span>                        <span class="n">Construir</span> <span class="n">ruta</span> <span class="n">al</span> <span class="n">archivo</span>
+<span class="n">path</span><span class="o">.</span><span class="n">expand</span>                      <span class="n">Expandir</span> <span class="o">~</span> <span class="n">en</span> <span class="n">la</span> <span class="n">ruta</span> <span class="n">de</span> <span class="n">Unix</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="interfaces-de-idiomas-extranjeros">
+<h2><span class="section-number">7.2. </span>Interfaces de idiomas extranjeros<a class="headerlink" href="#interfaces-de-idiomas-extranjeros" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Consulte la Sección «Interfaces del sistema y de idiomas extranjeros» en Escritura de extensiones de R para obtener detalles sobre cómo agregar funcionalidad a R mediante código compilado. Las funciones <code class="docutils literal notranslate"><span class="pre">.C</span></code> y <code class="docutils literal notranslate"><span class="pre">.Fortran</span></code> proporcionan una interfaz estándar para el código compilado que se ha vinculado a R, ya sea en el momento de la compilación o mediante <code class="docutils literal notranslate"><span class="pre">dyn.load</span></code>. Están pensados ​​principalmente para código C y FORTRAN compilado respectivamente, pero la función .C se puede usar con otros lenguajes que pueden generar interfaces C, por ejemplo C++.</p>
+<p>Las funciones <code class="docutils literal notranslate"><span class="pre">.Call</span></code> y <code class="docutils literal notranslate"><span class="pre">.External</span></code> proporcionan interfaces que permiten que el código compilado (principalmente código C compilado) manipule objetos R.</p>
+</div>
+<div class="section" id="internal-y-primitive">
+<h2><span class="section-number">7.3. </span>.Internal y .Primitive<a class="headerlink" href="#internal-y-primitive" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Las interfaces <code class="docutils literal notranslate"><span class="pre">.Internal</span></code> y <code class="docutils literal notranslate"><span class="pre">.Primitive</span></code> se utilizan para llamar al código C compilado en R en el momento de la compilación. Consulte la sección «<code class="docutils literal notranslate"><span class="pre">.Internal</span></code> vs <code class="docutils literal notranslate"><span class="pre">.Primitive</span></code>» en R <code class="docutils literal notranslate"><span class="pre">Internals</span></code>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="08-manejo-de-excepciones.html" class="btn btn-neutral float-right" title="8. Manejo de excepciones" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="06-computacion-en-el-lenguaje.html" class="btn btn-neutral float-left" title="6. Computación en el Lenguaje" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Derechos de autor 2021, Ferreira, Juan David.
+
+    </p>
+  </div>
+    
+    
+    
+    Construido con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

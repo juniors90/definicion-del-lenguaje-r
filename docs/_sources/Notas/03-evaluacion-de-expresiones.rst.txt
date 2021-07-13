@@ -1,0 +1,213 @@
+Evaluación de expresiones
+==========================
+
+
+Cuando un usuario escribe un comando en el indicador (o cuando se lee una expresión de un archivo), lo primero que sucede es que el analizador transforma el comando en una representación interna. El evaluador ejecuta expresiones R analizadas y devuelve el valor de la expresión. Todas las expresiones tienen un valor. Este es el núcleo del idioma.
+
+Este capítulo describe los mecanismos básicos del evaluador, pero evita la discusión de funciones especiales o grupos de funciones que se describen en capítulos separados más adelante o donde las páginas de ayuda deberían ser suficientes para la documentación.
+
+Los usuarios pueden construir expresiones e invocar al evaluador sobre ellas.
+
+Evaluación simple
+-------------------
+
+
+Constantes
+~~~~~~~~~~~~~~
+
+Cualquier número escrito directamente en el indicador es una constante y se evalúa.
+
+.. code-block:: R
+    
+    > 1
+    [1] 1
+
+Quizás inesperadamente, el número devuelto por la expresión ``1`` es numérico. En la mayoría de los casos, la diferencia entre un número entero y un valor numérico no será importante ya que R hará lo correcto al usar los números. Sin embargo, hay ocasiones en las que nos gustaría crear explícitamente un valor entero para una constante. Podemos hacer esto llamando a la función ``as.integer`` o usando varias otras técnicas. Pero quizás el enfoque más simple es calificar nuestra constante con el carácter sufijo "``L``". Por ejemplo, para crear el valor entero ``1``, podríamos usar
+
+.. code-block:: R
+    
+    > 1L
+    [1]
+
+Podemos usar el sufijo "``L``" para calificar cualquier número con la intención de convertirlo en un entero explícito. Entonces, "``0x10L``" crea el valor entero 16 a partir de la representación hexadecimal. La constante ``1e3L`` da 1000 como un número entero en lugar de un valor numérico y es equivalente a ``1000L``. (Tenga en cuenta que la "L" se considera que califica el término ``1e3`` y no el 3.) Si calificamos un valor con "L" que no es un valor entero, por ejemplo ``1e-3L``, recibimos una advertencia y se crea el valor numérico. También se crea una advertencia si hay un punto decimal innecesario en el número, por ejemplo ``1.L``.
+
+Obtenemos un error de sintaxis cuando usamos "L" con números complejos, por ejemplo ``12iL`` da un error. Las constantes son bastante aburridas y para hacer más necesitamos símbolos.
+
+.. code-block:: R
+
+    > 1
+    [1] 1
+    > aL
+    Error: object 'aL' not found
+    > 1L
+    [1] 1
+    > 0x10L
+    [1] 16
+    > 1e3L
+    [1] 1000
+    > 1e-3L
+    [1] 0.001
+    Warning message:
+    non-integer value 1e-3L qualified with L; using numeric value 
+    > 12iL
+    Error: unexpected symbol in "12iL"
+    > 
+
+
+Búsqueda de símbolo
+-------------------
+
+Cuando se crea una nueva variable, debe tener un nombre para que se pueda hacer referencia a ella y, por lo general, tiene un valor. El nombre en sí es un símbolo. Cuando se evalúa un símbolo, se devuelve su valor. Más adelante explicaremos en detalle cómo determinar el valor asociado a un símbolo.
+
+En este pequeño ejemplo, y es un símbolo y su valor es 4. Un símbolo también es un objeto R, pero rara vez es necesario tratar con símbolos directamente, excepto cuando se hace “programación en el lenguaje” (Capítulo 6 [Computación en el lenguaje] , página 32).
+
+
+.. code-block:: R
+
+    > y <-3.4
+    > y
+    [1] 3.4
+    >
+
+Llamada a funciones
+-------------------
+
+La mayoría de los cálculos realizados en R involucran la evaluación de funciones. También nos referiremos a esto como invocación de función. Las funciones se invocan por su nombre con una lista de argumentos separados por comas.
+
+.. code-block::
+
+    > mean(1:5)
+    [1] 3
+    > min(1:5)
+    [1] 1
+    > max(1:5)
+    [1] 5
+    > prod(1:5)
+    [1] 120
+    > sum(1:5)
+    [1] 15
+    > 
+
+En este ejemplo, las función media, mínimo, máximo, productoria y sumatoria se llamaron con un argumento, el vector de números enteros del :math:`1` al :math:`5`.
+
+R contiene una gran cantidad de funciones con diferentes propósitos. La mayoría se utilizan para producir un resultado que es un objeto R, pero otros se utilizan para sus efectos secundarios, por ejemplo, las funciones de impresión y trazado.
+
+Las llamadas a funciones pueden tener argumentos etiquetados (o nombrados), como en ``plot(x, y, pch = 3)``. Los argumentos sin etiquetas se conocen como posicionales ya que la función debe distinguir su significado de sus posiciones secuenciales entre los argumentos de la llamada, por ejemplo, que ``x`` denota la variable de abscisas e ``y`` la ordenada. El uso de etiquetas/nombres es una conveniencia obvia para funciones con una gran cantidad de argumentos opcionales.
+
+Un tipo especial de llamadas de función puede aparecer en el lado izquierdo del operador de asignación como en
+
+.. code-block:: R
+    
+    > class(x) <- "foo"
+
+Lo que realmente hace esta construcción es llamar a la función ``class<-`` con el objeto original y el lado derecho. Esta función realiza la modificación del objeto y devuelve el resultado que luego se almacena de nuevo en la variable original. (Al menos conceptualmente, esto es lo que sucede.
+
+Se hace un esfuerzo adicional para evitar la duplicación innecesaria de datos).
+
+Operadores
+-------------------
+
+R permite el uso de expresiones aritméticas usando operadores similares a los del lenguaje de programación C, por ejemplo
+
+.. code-block:: R
+    
+    > 1 + 12
+    [1] 13
+
+Las expresiones pueden agruparse usando paréntesis, mezclarse con llamadas a funciones y asignarse a variables de una manera sencilla
+
+.. code-block:: R
+    
+    > y <- 2 * (a + log(x))
+
+R contiene varios operadores. Se enumeran en la siguiente tabla.
+
+
++----------+-----------------------------------------------------------------------------------+
+|  ``-``   |  Sustracción puede ser unario o binario                                           |
++----------+-----------------------------------------------------------------------------------+
+| ``+``    |  Adición, puede ser unario o binario                                              |
++----------+-----------------------------------------------------------------------------------+
+|  ``!``   |  Unario no                                                                        |
++----------+-----------------------------------------------------------------------------------+
+| ``~``    |  Tilde, utilizado para fórmulas modelo, puede ser unario o binario                |
++----------+-----------------------------------------------------------------------------------+
+| ``?``    |   Ayuda                                                                           |
++----------+-----------------------------------------------------------------------------------+
+|  ``:``   |  Secuencia, binario (en fórmulas modelo: interacción)                             |
++----------+-----------------------------------------------------------------------------------+
+| ``*``    | Multiplicación, binaria                                                           |
++----------+-----------------------------------------------------------------------------------+
+| ``/``    | División, binaria                                                                 |
++----------+-----------------------------------------------------------------------------------+
+| ``^``    | Exponenciación, binario                                                           |
++----------+-----------------------------------------------------------------------------------+
+| ``%x%``  | Operadores binarios especiales, x se puede reemplazar por cualquier nombre válido |
++----------+-----------------------------------------------------------------------------------+
+| ``%%``   | Módulo, binario                                                                   |
++----------+-----------------------------------------------------------------------------------+
+| ``%/%``  | Dividir enteros, binario                                                          |
++----------+-----------------------------------------------------------------------------------+
+| ``%*%``  |Producto de matriz, binario                                                        |
++----------+-----------------------------------------------------------------------------------+
+| ``%o%``  | Producto externo, binario                                                         |
++----------+-----------------------------------------------------------------------------------+
+|  ``%x%`` | producto Kronecker, binario                                                       |
++----------+-----------------------------------------------------------------------------------+
+| ``%in%`` | Operador de coincidencia, binario (en fórmulas de modelo: anidamiento)            |
++----------+-----------------------------------------------------------------------------------+
+|  ``<``   | Menor que, binario                                                                |
++----------+-----------------------------------------------------------------------------------+
+| ``>``    | Mayor que, binario                                                                |
++----------+-----------------------------------------------------------------------------------+
+| ``==``   | Igual a, binario                                                                  |
++----------+-----------------------------------------------------------------------------------+
+| ``>=``   | Mayor o igual que, binario                                                        |
++----------+-----------------------------------------------------------------------------------+
+| ``<=``   | Menor o igual que, binario                                                        |
++----------+-----------------------------------------------------------------------------------+
+|  ``&``   | Y, binario, vectorizado                                                           |
++----------+-----------------------------------------------------------------------------------+
+| ``&&``   | Y, binario, no vectorizado                                                        |
++----------+-----------------------------------------------------------------------------------+
+| ``|``    | O binario, vectorizado                                                            |
++----------+-----------------------------------------------------------------------------------+
+| ``||``   | O binario, no vectorizado                                                         |
++----------+-----------------------------------------------------------------------------------+
+| ``<-``   | Asignación izquierda, binario                                                     |
++----------+-----------------------------------------------------------------------------------+
+|  ``->``  | Asignación correcta, binario                                                      |
++----------+-----------------------------------------------------------------------------------+
+|  ``$``   | Lista de subconjunto, binario                                                     |
++----------+-----------------------------------------------------------------------------------+
+
+Excepto por la sintaxis, no hay diferencia entre aplicar un operador y llamar a una función. De hecho, ``x + y`` se puede escribir de forma equivalente "``+``" ``(x, y)``. Tenga en cuenta que, dado que "``+``" es un nombre de función no estándar, debe citarse.
+
+R trata con vectores completos de datos a la vez, y la mayoría de los operadores elementales y funciones matemáticas básicas como log están vectorizados (como se indica en la tabla anterior). Esto significa que, por ejemplo. la adición de dos vectores de la misma longitud creará un vector que contiene las sumas de elementos, haciendo un bucle implícito sobre el índice del vector. Esto se aplica también a otros operadores como ``-``, ``*`` y ``/`` así como a estructuras de dimensiones superiores. Observe en particular que multiplicar dos matrices no produce el producto matricial habitual (el operador ``%*%`` existe para ese propósito).
+
+En la Sección 3.3 [Operaciones aritméticas elementales], página 14, se analizarán algunos puntos más importantes relacionados con las operaciones vectorizadas.
+
+Para acceder a elementos individuales de un vector atómico, generalmente se usa la construcción ``x[i]``.
+
+.. code-block:: R
+    
+    > x <- rnorm(5)
+    > x
+    [1] -0.12526937 -0.27961154 -1.03718717 -0.08156527 1.37167090
+    > x[2]
+    [1] -0.2796115
+
+
+Es más común acceder a los componentes de la lista mediante ``x$a`` o ``x[[i]]``.
+
+.. code-block:: R
+    
+    > x <- options()
+    > x$prompt
+    [1] "> "
+
+Las construcciones de indexación también pueden aparecer en el lado derecho de una tarea.
+
+Al igual que los otros operadores, la indexación se realiza en realidad mediante funciones, y se podría haber utilizado ``"[" (x, 2)`` en lugar de ``x [2]``.
+
+Las operaciones de indexación de R contienen muchas características avanzadas que se describen con más detalle en la Sección 3.4 [Indexación], página 15.

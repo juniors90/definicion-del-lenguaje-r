@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>8. Manejo de excepciones &mdash; documentación de Definición del Lenguaje R - 0.0.1</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="9. Debugging" href="09-debugging.html" />
+    <link rel="prev" title="7. Interfaz del sistema y de idiomas extranjeros" href="07-interfaces-del-sistema-y-de-idiomas-extranjeros.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Definición del Lenguaje R
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01-introduccion.html">1. Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-objetos.html">2. Objetos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-evaluacion-de-expresiones.html">3. Evaluación de expresiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-funciones.html">4. Funciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-programacion-orientada-a-objetos.html">5. Programación Orientada a Objetos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-computacion-en-el-lenguaje.html">6. Computación en el Lenguaje</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-interfaces-del-sistema-y-de-idiomas-extranjeros.html">7. Interfaz del sistema y de idiomas extranjeros</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Manejo de excepciones</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#stop">8.1. stop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#warning">8.2. warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#on-exit">8.3. on.exit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opciones-de-error">8.4. Opciones de error</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="09-debugging.html">9. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-parser.html">10. Parser</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Definición del Lenguaje R</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">8. </span>Manejo de excepciones</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Notas/08-manejo-de-excepciones.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="manejo-de-excepciones">
+<h1><span class="section-number">8. </span>Manejo de excepciones<a class="headerlink" href="#manejo-de-excepciones" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Las facilidades de manejo de excepciones en R se proporcionan a través de dos mecanismos. Las funciones como detener o advertir se pueden llamar directamente o se pueden usar opciones como «advertir» para controlar el manejo de problemas.</p>
+<div class="section" id="stop">
+<h2><span class="section-number">8.1. </span>stop<a class="headerlink" href="#stop" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Una llamada a <code class="docutils literal notranslate"><span class="pre">stop</span></code> detiene la evaluación de la expresión actual, imprime el argumento del mensaje y devuelve la ejecución al nivel superior.</p>
+</div>
+<div class="section" id="warning">
+<h2><span class="section-number">8.2. </span>warning<a class="headerlink" href="#warning" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>La función <code class="docutils literal notranslate"><span class="pre">warning</span></code> toma un solo argumento que es una cadena de caracteres. El comportamiento de una llamada a <code class="docutils literal notranslate"><span class="pre">warning</span></code> depende del valor de la opción <code class="docutils literal notranslate"><span class="pre">&quot;warn&quot;</span></code>. Si <code class="docutils literal notranslate"><span class="pre">warn</span></code> es negativo, se ignoran las advertencias. Si es cero, se almacenan e imprimen una vez finalizada la función de nivel superior. Si es uno, se imprimen a medida que ocurren y si es 2 (o más) las advertencias se convierten en errores.</p>
+<p>Si <code class="docutils literal notranslate"><span class="pre">&quot;warn&quot;</span></code> es cero (el valor predeterminado), se crea una variable last.warning y los mensajes asociados con cada llamada a <code class="docutils literal notranslate"><span class="pre">warning</span></code> se almacenan, secuencialmente, en este vector. Si hay menos de 10 advertencias, se imprimen después de que la función haya terminado de evaluar. Si hay más de 10, se imprime un mensaje que indica cuántas advertencias se produjeron. En cualquier caso, <code class="docutils literal notranslate"><span class="pre">last.warning</span></code> contiene el vector de mensajes y <code class="docutils literal notranslate"><span class="pre">warnings</span></code> proporciona una forma de acceder e imprimirlo.</p>
+</div>
+<div class="section" id="on-exit">
+<h2><span class="section-number">8.3. </span>on.exit<a class="headerlink" href="#on-exit" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Una función puede insertar una llamada a <code class="docutils literal notranslate"><span class="pre">on.exit</span></code> en cualquier punto del cuerpo de una función. El efecto de una llamada a <code class="docutils literal notranslate"><span class="pre">on.exit</span></code> es almacenar el valor del cuerpo para que se ejecute cuando la función salga. Esto permite que la función cambie algunos parámetros del sistema y se asegure de que se restablezcan a los valores adecuados cuando finalice la función. Se garantiza que <code class="docutils literal notranslate"><span class="pre">on.exit</span></code> se ejecutará cuando la función salga, ya sea directamente o como resultado de una advertencia.</p>
+<p>Un error en la evaluación del código <code class="docutils literal notranslate"><span class="pre">on.exit</span></code> provoca un salto inmediato al nivel superior sin más procesamiento del código <code class="docutils literal notranslate"><span class="pre">on.exit</span></code>. <code class="docutils literal notranslate"><span class="pre">on.exit</span></code> toma un solo argumento que es una expresión que se evaluará cuando se sale de la función.</p>
+</div>
+<div class="section" id="opciones-de-error">
+<h2><span class="section-number">8.4. </span>Opciones de error<a class="headerlink" href="#opciones-de-error" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Hay una serie de variables de <code class="docutils literal notranslate"><span class="pre">options</span></code> que se pueden usar para controlar cómo R maneja los errores y las advertencias. Se enumeran en la tabla siguiente.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;warn&quot;</span></code> Controla la impresión de advertencias.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;Warning.expression&quot;</span></code> Establece una expresión que se evaluará cuando se produzca una advertencia. La impresión normal de advertencias se suprime si se establece esta opción.</p>
+<p><code class="docutils literal notranslate"><span class="pre">'error'</span></code> Instala una expresión que se evaluará cuando ocurra un error. La impresión normal de mensajes de error y mensajes de advertencia precede a la evaluación de la expresión.</p>
+<p>Las expresiones instaladas por <code class="docutils literal notranslate"><span class="pre">options(&quot;error&quot;)</span></code> se evalúan antes de que se lleven a cabo las llamadas a <code class="docutils literal notranslate"><span class="pre">on.exit</span></code>.</p>
+<p>Se pueden usar <code class="docutils literal notranslate"><span class="pre">options(error</span> <span class="pre">=</span> <span class="pre">expression(q(&quot;yes&quot;)))</span></code> para hacer que R salga cuando se ha señalado un error. En este caso, un error hará que R se apague y se guardará el entorno global.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="09-debugging.html" class="btn btn-neutral float-right" title="9. Debugging" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="07-interfaces-del-sistema-y-de-idiomas-extranjeros.html" class="btn btn-neutral float-left" title="7. Interfaz del sistema y de idiomas extranjeros" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Derechos de autor 2021, Ferreira, Juan David.
+
+    </p>
+  </div>
+    
+    
+    
+    Construido con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

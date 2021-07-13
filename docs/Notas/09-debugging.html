@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>9. Debugging &mdash; documentación de Definición del Lenguaje R - 0.0.1</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="10. Parser" href="10-parser.html" />
+    <link rel="prev" title="8. Manejo de excepciones" href="08-manejo-de-excepciones.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Definición del Lenguaje R
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01-introduccion.html">1. Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-objetos.html">2. Objetos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-evaluacion-de-expresiones.html">3. Evaluación de expresiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-funciones.html">4. Funciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-programacion-orientada-a-objetos.html">5. Programación Orientada a Objetos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-computacion-en-el-lenguaje.html">6. Computación en el Lenguaje</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-interfaces-del-sistema-y-de-idiomas-extranjeros.html">7. Interfaz del sistema y de idiomas extranjeros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-manejo-de-excepciones.html">8. Manejo de excepciones</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Debugging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#browser">9.1. browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#debug-undebug">9.2. debug/undebug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#trace-untrace">9.3. trace/untrace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#traceback">9.4. traceback</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="10-parser.html">10. Parser</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Definición del Lenguaje R</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">9. </span>Debugging</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Notas/09-debugging.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="debugging">
+<h1><span class="section-number">9. </span>Debugging<a class="headerlink" href="#debugging" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>La depuración del código siempre ha sido un arte. R proporciona varias herramientas que ayudan a los usuarios a encontrar problemas en su código. Estas herramientas detienen la ejecución en puntos particulares del código y se puede inspirar el estado actual de la computación.</p>
+<p>La mayor parte de la depuración se realiza mediante llamadas al <code class="docutils literal notranslate"><span class="pre">browser</span></code> o <code class="docutils literal notranslate"><span class="pre">debug</span></code>. Ambas funciones se basan en el mismo mecanismo interno y ambas proporcionan al usuario un mensaje especial. Se puede escribir cualquier comando en el indicador. El entorno de evaluación del comando es el entorno activo actualmente. Esto le permite examinar el estado actual de cualquier variable, etc. Hay comandos especiales que R interpreta de manera diferente. Ellos son,</p>
+<p>«<code class="docutils literal notranslate"><span class="pre">RET</span></code>»</p>
+<blockquote>
+<div><p>Vaya a la siguiente declaración si la función se está depurando. Continuar con la ejecución si se invocó el navegador.</p>
+</div></blockquote>
+<p>«<code class="docutils literal notranslate"><span class="pre">C</span></code>»</p>
+<p>«<code class="docutils literal notranslate"><span class="pre">Cont</span></code>»</p>
+<blockquote>
+<div><p>Continúe la ejecución.</p>
+</div></blockquote>
+<p>«<code class="docutils literal notranslate"><span class="pre">N</span></code>»</p>
+<blockquote>
+<div><p>Ejecuta la siguiente instrucción de la función. Esto también funciona desde el navegador.</p>
+</div></blockquote>
+<p>«<code class="docutils literal notranslate"><span class="pre">where</span></code>»</p>
+<blockquote>
+<div><p>Muestra la pila de llamadas</p>
+</div></blockquote>
+<p>«<code class="docutils literal notranslate"><span class="pre">Q</span></code>»</p>
+<blockquote>
+<div><p>Detiene la ejecución y salta al nivel superior de inmediato.</p>
+</div></blockquote>
+<p>Si hay una variable local con el mismo nombre que uno de los comandos especiales enumerados anteriormente, se puede acceder a su valor mediante get. Una llamada a <code class="docutils literal notranslate"><span class="pre">get</span></code> con el nombre entre comillas recuperará el valor en el entorno actual.</p>
+<p>El depurador proporciona acceso solo a expresiones interpretadas. Si una función llama a un idioma extranjero (como C), no se proporciona acceso a las declaraciones en ese idioma. La ejecución se detendrá en la siguiente instrucción que se evalúe en R. Se puede usar un depurador simbólico como gdb para depurar código compilado.</p>
+<div class="section" id="browser">
+<h2><span class="section-number">9.1. </span>browser<a class="headerlink" href="#browser" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Una llamada al navegador de funciones hace que R detenga la ejecución en ese punto y proporcione al usuario un mensaje especial. Se ignoran los argumentos al navegador.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">foo</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+<span class="o">+</span>    <span class="n">c</span> <span class="o">&lt;-</span> <span class="mi">3</span>
+<span class="o">+</span>    <span class="n">browser</span><span class="p">()</span>
+<span class="o">+</span>   <span class="p">}</span>
+<span class="o">&gt;</span> <span class="n">foo</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">Called</span> <span class="n">from</span><span class="p">:</span> <span class="n">foo</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">Browse</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">s</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="mi">4</span>
+<span class="n">Browse</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">get</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="mi">3</span>
+<span class="n">Browse</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="debug-undebug">
+<h2><span class="section-number">9.2. </span>debug/undebug<a class="headerlink" href="#debug-undebug" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>El depurador puede invocarse en cualquier función mediante el comando debug (fun). Posteriormente, cada vez que se evalúa esa función se invoca al depurador. El depurador le permite controlar la evaluación de las declaraciones en el cuerpo de la función. Antes de que se ejecute cada declaración, se imprime la declaración y se proporciona un mensaje especial. Se puede dar cualquier comando, los de la tabla anterior tienen un significado especial.</p>
+<p>La depuración se apaga mediante una llamada a undebug con la función como argumento.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">debug</span><span class="p">(</span><span class="n">mean.default</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nf">mean</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
+<span class="n">debugging</span> <span class="n">in</span><span class="o">:</span> <span class="nf">mean.default</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
+<span class="n">debug</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nf">if </span><span class="p">(</span><span class="n">na.rm</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+    <span class="n">trim</span> <span class="o">&lt;-</span> <span class="n">trim</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+    <span class="n">n</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">recursive</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span>
+    <span class="nf">if </span><span class="p">(</span><span class="n">trim</span> <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">if </span><span class="p">(</span><span class="n">trim</span> <span class="o">&gt;=</span> <span class="m">0.5</span><span class="p">)</span>
+        <span class="nf">return</span><span class="p">(</span><span class="nf">median</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">na.rm</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">))</span>
+        <span class="n">lo</span> <span class="o">&lt;-</span> <span class="nf">floor</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">trim</span><span class="p">)</span> <span class="o">+</span> <span class="m">1</span>
+        <span class="n">hi</span> <span class="o">&lt;-</span> <span class="n">n</span> <span class="o">+</span> <span class="m">1</span> <span class="o">-</span> <span class="n">lo</span>
+        <span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">sort</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">partial</span> <span class="o">=</span> <span class="nf">unique</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">)))[</span><span class="n">lo</span><span class="o">:</span><span class="n">hi</span><span class="p">]</span>
+        <span class="n">n</span> <span class="o">&lt;-</span> <span class="n">hi</span> <span class="o">-</span> <span class="n">lo</span> <span class="o">+</span> <span class="m">1</span>
+    <span class="p">}</span>
+    <span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+<span class="p">}</span>
+<span class="n">Browse</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">&gt;</span>
+<span class="n">debug</span><span class="o">:</span> <span class="nf">if </span><span class="p">(</span><span class="n">na.rm</span><span class="p">)</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+<span class="n">Browse</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">&gt;</span>
+<span class="n">debug</span><span class="o">:</span> <span class="n">trim</span> <span class="o">&lt;-</span> <span class="n">trim</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+<span class="n">Browse</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">&gt;</span>
+<span class="n">debug</span><span class="o">:</span> <span class="n">n</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">recursive</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span>
+<span class="n">Browse</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">c</span>
+<span class="n">exiting</span> <span class="n">from</span><span class="o">:</span> <span class="nf">mean.default</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">5.5</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="trace-untrace">
+<h2><span class="section-number">9.3. </span>trace/untrace<a class="headerlink" href="#trace-untrace" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Otra forma de monitorear el comportamiento de R es a través del mecanismo de rastreo. trace se llama con un único argumento que es el nombre de la función que desea rastrear. No es necesario citar el nombre, pero para algunas funciones deberá citar el nombre para evitar un error de sintaxis.</p>
+<p>Cuando se ha invocado el rastreo en una función, cada vez que se evalúa esa función, se imprime su llamada. Este mecanismo se elimina llamando a untrace con la función como argumento.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">trace</span><span class="p">(</span><span class="s">&quot;[&lt;-&quot;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span>
+<span class="o">&gt;</span> <span class="n">x</span><span class="p">[</span><span class="m">3</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="m">4</span>
+<span class="n">trace</span><span class="o">:</span> <span class="s">&quot;[&lt;-&quot;</span><span class="p">(</span><span class="o">*</span><span class="n">tmp</span><span class="o">*</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="traceback">
+<h2><span class="section-number">9.4. </span>traceback<a class="headerlink" href="#traceback" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Cuando un error ha provocado un salto al nivel superior, se coloca una variable especial llamada .Traceback en el entorno base. .Traceback es un vector de caracteres con una entrada para cada llamada de función que estaba activa en el momento en que ocurrió el error. Se puede realizar un examen de .Traceback mediante una llamada a traceback.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="10-parser.html" class="btn btn-neutral float-right" title="10. Parser" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="08-manejo-de-excepciones.html" class="btn btn-neutral float-left" title="8. Manejo de excepciones" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Derechos de autor 2021, Ferreira, Juan David.
+
+    </p>
+  </div>
+    
+    
+    
+    Construido con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

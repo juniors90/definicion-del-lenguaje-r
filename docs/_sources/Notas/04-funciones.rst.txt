@@ -1,0 +1,141 @@
+Funciones
+=========
+
+
+Escritura de Funciones
+-----------------------
+
+Si bien R puede ser muy útil como análisis de datos para la mayoría de los usuarios, rápidamente se les ocurre querer escribir sus propias funciones. Esta es una de las ventajas reales de R. Los usuarios pueden programarlo y pueden, si lo desean, cambiar las funciones de nivel del sistema a funciones que encuentran más apropiadas.
+
+R también proporciona instalaciones que facilitan la realización de las funciones que haya creado. D. Consulte la sección "Escritura de documentación de R" en Escritura de extensiones de R.
+
+Sintaxis y ejemplos
+-----------------------
+
+La sintaxis para escribir una función es
+
+.. code-block:: R
+    
+    function(arglist) body
+
+El primer componente de la declaración de función es la palabra clave función que le indica a R que desea crear una función.
+
+Una lista de argumentos es una lista de argumentos formales separados por comas. Un argumento formal puede ser un símbolo, una declaración de la forma "símbolo = expresión" o el argumento formal especial ``...``.
+
+- El cuerpo puede ser cualquier expresión R válida.
+
+- El cuerpo es un grupo de expresiones contenidas entre llaves ("``{``" y "``}``").
+
+- Las funciones se asignan a símbolos, pero no es necesario.
+
+El valor devuelto por la llamada a la función es una función.
+
+Si no se le asigna un nombre, se denomina función anónima. Las funciones anónimas se utilizan con mayor frecuencia como argumentos para otras funciones, como la familia de aplicación o externa.
+
+Aquí hay una función simple: ``echo <- function(x) print(x)``. Entonces echo es una función que toma un solo argumento y cuando se invoca ``echo`` imprime su argumento.
+
+Argumentos
+-----------------------
+
+Los argumentos formales de la función desafían las variables cuyos valores se proporcionarán en el momento en que se invoca la función. Los nombres de estos argumentos se pueden usar dentro del cuerpo de la función donde obtienen el valor proporcionado en el momento de la invocación de la función.
+
+Los valores predeterminados para los argumentos se pueden especificar usando la forma especial "nombre = expresión".
+En este caso, si el usuario no especifica un valor para el argumento cuando se invoca la función, la expresión se asociará con el símbolo correspondiente. Cuando se necesita un valor, la expresión se evalúa en el marco de evaluación de la función.
+
+Los comportamientos predeterminados también se pueden especificar utilizando la función que falta. Cuando se llama a missing con el nombre de un argumento formal, devuelve ``TRUE`` si el argumento formal no coincide con ningún argumento real y no se ha modificado posteriormente en el cuerpo de la función. Por lo tanto, un argumento que falte tendrá su valor predeterminado, si lo hubiera. La función que falta no fuerza la evaluación del argumento.
+
+El tipo especial de argumento ``...`` puede contener cualquier número de argumentos proporcionados. Se utiliza para una variedad de propósitos. Le permite escribir una función que toma un número arbitrario de argumentos. Puede usarse para absorber algunos argumentos en una función intermedia que luego puede ser extraída por funciones llamadas posteriormente.
+
+Funciones como objetos
+-----------------------
+
+Las funciones son objetos de primera clase en R. Se pueden usar en cualquier lugar donde se requiera un objeto R. En particular, pueden pasarse como argumentos a funciones y devolverse como valores de funciones. Consulte la Sección 2.1.5 [Objetos de función], página 4, para obtener más detalles. Capítulo 4: Funciones 23.
+
+Evaluation
+-----------------
+
+Entorno de evaluación
+~~~~~~~~~~~~~~~~~~~~~~
+
+Cuando se llama o invoca una función, se crea un nuevo marco de evaluación. En este marco, los argumentos formales se emparejan con los argumentos proporcionados de acuerdo con las reglas dadas en la Sección 4.3.2 [Coincidencia de argumentos], página 23. Las declaraciones en el cuerpo de la función se evalúan secuencialmente en este marco de entorno.
+
+El marco adjunto del marco de evaluación es el marco de entorno asociado con la función que se invoca. Esto puede ser diferente de S. Aunque muchas funciones tienen .GlobalEnv como su entorno, esto no tiene que ser cierto y las funciones desafiadas en paquetes con espacios de nombres (normalmente) tienen el espacio de nombres del paquete como su entorno.
+
+Coincidencia de argumentos
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Esta subsección se aplica a los cierres pero no a las funciones primitivas. Estos últimos normalmente ignoran las etiquetas y hacen coincidencias posicionales, pero se deben consultar sus páginas de ayuda para conocer las excepciones, que incluyen ``log``, ``round``, ``signif``, ``rep`` y ``seq.int``.
+
+Lo primero que ocurre en la evaluación de una función es la coincidencia de los argumentos formales con los reales o suministrados. Esto se hace mediante un proceso de tres pasos:
+
+1. Coincidencia exacta en etiquetas. Para cada argumento proporcionado con nombre, se busca en la lista de argumentos formales un elemento cuyo nombre coincida exactamente. Es un error que el mismo argumento formal coincida con varios valores reales o viceversa.
+
+2. Coincidencia parcial de etiquetas. Cada argumento proporcionado con nombre restante se compara con los argumentos formales restantes mediante una coincidencia parcial. Si el nombre del argumento proporcionado coincide exactamente con la primera parte de un argumento formal, se considera que los dos argumentos coinciden. Es un error tener múltiples coincidencias parciales. Observe que si ``f <- function(fumble, fooey) fbody``, entonces ``f(f = 1, fo = 2)`` es ilegal, aunque el segundo argumento real solo coincide con ``fooey``. Sin embargo, ``f(f = 1, fooey = 2)`` es legal, ya que el segundo argumento coincide exactamente y se elimina de la consideración de coincidencia parcial. Si los argumentos formales contienen ``...`` entonces la coincidencia parcial solo se aplica a los argumentos que la preceden.
+
+3. Emparejamiento posicional. Cualquier argumento formal que no coincida está vinculado a argumentos proporcionados sin nombre, en orden. Si hay un argumento ``...``, tomará los argumentos restantes, etiquetados o no.
+
+Si alguno de los argumentos no coincide, se declara un error. La coincidencia de argumentos se ve aumentada por las funciones match.arg, match.call y match.fun. El acceso al algoritmo de coincidencia parcial utilizado por R se realiza a través de pmatch.
+
+Evaluación de argumentos
+--------------------------
+
+Una de las cosas más importantes que debe saber sobre la evaluación de argumentos para una función es que los argumentos proporcionados y los argumentos predeterminados se tratan de manera diferente. Los argumentos proporcionados a una función se evalúan en el marco de evaluación de la función que realiza la llamada. Los argumentos predeterminados de una función se evalúan en el marco de evaluación de la función.
+
+La semántica de invocar una función en un argumento R es llamada por valor. En general, los argumentos proporcionados se comportan como si fueran variables locales inicializadas con el valor proporcionado y el nombre del argumento formal correspondiente. Cambiar el valor de un argumento proporcionado dentro de una función no afectará el valor de la variable en el marco de llamada.
+
+R tiene una forma de evaluación perezosa de argumentos de función. Los argumentos no se evalúan hasta que se necesitan. Es importante darse cuenta de que en algunos casos el argumento nunca será evaluado. Por lo tanto, es de mal estilo usar argumentos en funciones para causar efectos secundarios. Mientras que en C es común que el Capítulo 4: Funciones 24 use la forma, foo (x = y) para invocar a foo con el valor de y y simultáneamente para asignar el valor de y a x, este mismo estilo no debe usarse en R. No hay garantía de que el argumento se evalúe alguna vez y, por lo tanto, es posible que la asignación no se lleve a cabo.
+
+También vale la pena señalar que el efecto de ``foo(x <- y)`` si se evalúa el argumento es cambiar el valor de x en el entorno de llamada y no en el entorno de evaluación de foo.
+
+Es posible acceder a las expresiones reales (no predeterminadas) utilizadas como argumentos dentro de la función. El mecanismo se implementa a través de promesas. Cuando se evalúa una función, la expresión real utilizada como argumento se almacena en la promesa junto con un puntero al entorno desde el que se llamó a la función. Cuando (si) se evalúa el argumento, la expresión almacenada se evalúa en el entorno desde el que se llamó a la función. Dado que solo se utiliza un puntero al entorno, cualquier cambio realizado en ese entorno entrará en vigor durante esta evaluación. El valor resultante también se almacena en un lugar separado en la promesa.
+
+Las evaluaciones posteriores recuperan este valor almacenado (no se lleva a cabo una segunda evaluación). El acceso a la expresión no evaluada también está disponible usando sustituto.
+
+Cuando se llama a una función, a cada argumento formal se le asigna una promesa en el entorno local de la llamada con el espacio de expresión que contiene el argumento real (si existe) y el espacio de entorno que contiene el entorno del llamador. Si no se proporciona ningún argumento real para un argumento formal en la llamada y hay una expresión predeterminada, se asigna de manera similar al espacio de expresión del argumento formal, pero con el entorno establecido en el entorno local.
+
+El proceso de archivar el espacio de valor de una promesa mediante la evaluación del contenido del espacio de expresión en el entorno de la promesa se llama forzar la promesa. Una promesa solo se forzará una vez, y el contenido de la ranura de valor se utilizará directamente más adelante.
+
+Una promesa es forzada cuando se necesita su valor. Esto suele suceder dentro de las funciones internas, pero una promesa también puede forzarse mediante la evaluación directa de la promesa en sí. En ocasiones, esto es útil cuando una expresión predeterminada depende del valor de otro argumento formal u otra variable en el entorno local. Esto se ve en el siguiente ejemplo, donde la etiqueta única asegura que la etiqueta se basa en el valor de x antes de que se cambie en la siguiente línea.
+
+.. code-block::
+    
+    function(x, label = deparse(x)) {
+        label
+        x <- x + 1
+        print(label)
+        }
+
+El espacio de expresión de una promesa puede implicar en sí mismo otras promesas. Esto sucede siempre que un argumento no evaluado se pasa como argumento a otra función. Al forzar una promesa, otras promesas en su expresión también se forzarán de forma recursiva a medida que se evalúen.
+
+Alcance
+------------
+
+El alcance o las reglas de determinación del alcance son simplemente el conjunto de reglas que utiliza el evaluador para determinar un valor para un símbolo. Cada lenguaje de computadora tiene un conjunto de tales reglas. En R, las reglas son bastante simples, pero existen mecanismos para subvertir las reglas habituales o predeterminadas.
+
+R se adhiere a un conjunto de reglas que se denominan alcance léxico. Esto significa que las vinculaciones de variables vigentes en el momento en que se creó la expresión se utilizan para proporcionar valores para cualquier símbolo no vinculado en la expresión.
+
+La mayoría de las propiedades interesantes del alcance están relacionadas con la evaluación de funciones y nos concentramos en este tema. Un símbolo puede estar ligado o no ligado. Todos los argumentos formales de una función proporcionan símbolos enlazados en el cuerpo de la función. Cualquier otro símbolo en el cuerpo de la función son variables locales o variables independientes. Una variable local es aquella que se desafía dentro de la función. Debido a que R no tiene una definición formal de variables, simplemente se usan según sea necesario, puede ser difícil determinar si una variable es local o no. Las variables locales 25 deben ser desafiadas, esto generalmente se hace colocándolas en el lado izquierdo de una asignación.
+
+Durante el proceso de evaluación, si se detecta un símbolo no vinculado, R intenta encontrar un valor para él. Las reglas de determinación del alcance determinan cómo se desarrolla este proceso. En R se busca primero el entorno de la función, luego su recinto y así sucesivamente hasta alcanzar el entorno global.
+
+El entorno global encabeza una lista de búsqueda de entornos que se buscan secuencialmente en busca de un símbolo coincidente. Luego se usa el valor del primer partido.
+
+Cuando este conjunto de reglas se combina con el hecho de que las funciones pueden devolverse como valores de otras funciones, se obtienen algunas propiedades más bien agradables, pero a primera vista, peculiares.
+
+A simple example:: 
+
+    f <- function() {
+        y <- 10
+        g <- function(x) x + y
+        return(g)
+    }
+    h <- f()
+    h(3)
+
+Una pregunta bastante interesante es qué sucede cuando se evalúa ``h``. Cuando se evalúa el cuerpo de una función, no hay problema para determinar valores para variables locales o para variables ligadas.
+
+Las reglas de alcance determinan cómo el lenguaje determinará los valores de las variables independientes.
+
+Cuando se evalúa ``h(3)`` vemos que su cuerpo es el de ``g``. Dentro de ese cuerpo, ``x`` está vinculado al argumento formal ``e`` y no está vinculado. En un lenguaje con alcance léxico, ``x`` se asociará con el valor ``3`` e ``y`` con el valor local de ``10`` a ``f``, por lo que ``h(3)`` debería devolver el valor ``13``. En R, esto es lo que sucede.
+
+En S, debido a las diferentes reglas de alcance, se obtendrá un error que indica que no se encuentra ``y``, a menos que haya una variable ``y`` en su espacio de trabajo, en cuyo caso se usará su valor.

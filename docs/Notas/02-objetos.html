@@ -1,0 +1,576 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>2. Objetos &mdash; documentación de Definición del Lenguaje R - 0.0.1</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="3. Evaluación de expresiones" href="03-evaluacion-de-expresiones.html" />
+    <link rel="prev" title="1. Introducción" href="01-introduccion.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Definición del Lenguaje R
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01-introduccion.html">1. Introducción</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Objetos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tipos-basicos">2.1. Tipos Básicos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vectores">2.1.1. Vectores</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#listas">2.1.2. Listas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#objetos-de-lenguaje">2.1.3. Objetos de lenguaje</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#objetos-de-simbolo">2.1.3.1. Objetos de símbolo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#objetos-de-expresion">2.1.4. Objetos de expresión</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#null">2.1.5. NULL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dot-dot-dot">2.1.6. Dot-dot-dot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#environments">2.1.7. Environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#objetos-integrados-y-formas-especiales">2.1.8. Objetos integrados y formas especiales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#objetos-promesa">2.1.9. Objetos Promesa</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#objetos-pairlist">2.1.10. Objetos Pairlist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#el-tipo-any">2.1.11. El tipo «Any»</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#atributos">2.2. Atributos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#names">2.2.1. Names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dimensions">2.2.2. Dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dimnames">2.2.3. Dimnames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clases">2.2.4. Clases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#time-series-attributes">2.2.5. Time series attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#copying-of-attributes">2.2.6. Copying of attributes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#objetos-compuestos-especiales">2.3. Objetos compuestos especiales</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#factores">2.3.1. Factores</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#objetos-dataframe">2.3.2. Objetos DataFrame</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03-evaluacion-de-expresiones.html">3. Evaluación de expresiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-funciones.html">4. Funciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-programacion-orientada-a-objetos.html">5. Programación Orientada a Objetos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-computacion-en-el-lenguaje.html">6. Computación en el Lenguaje</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-interfaces-del-sistema-y-de-idiomas-extranjeros.html">7. Interfaz del sistema y de idiomas extranjeros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-manejo-de-excepciones.html">8. Manejo de excepciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-debugging.html">9. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-parser.html">10. Parser</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Definición del Lenguaje R</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">2. </span>Objetos</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Notas/02-objetos.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="objetos">
+<h1><span class="section-number">2. </span>Objetos<a class="headerlink" href="#objetos" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>En todos los lenguajes informáticos, las variables proporcionan un medio para acceder a los datos almacenados en la memoria. R no proporciona acceso directo a la memoria de la computadora, sino que proporciona una serie de estructuras de datos especializadas a las que nos referiremos como objetos. Se hace referencia a estos objetos mediante símbolos o variables. En R, sin embargo, los símbolos son en sí mismos objetos y pueden manipularse de la misma forma que cualquier otro objeto. Esto es diferente de muchos otros lenguajes y tiene efectos de amplio alcance.</p>
+<p>En este capítulo proporcionamos descripciones preliminares de las diversas estructuras de datos proporcionadas en R. En los capítulos siguientes se encontrarán descripciones más detalladas de muchas de ellas. La función específica R <code class="docutils literal notranslate"><span class="pre">typeof</span></code> devuelve el tipo de un objeto R. Tenga en cuenta que en el código C subyacente a R, todos los objetos apuntan a una estructura con typedef <code class="docutils literal notranslate"><span class="pre">SEXPREC</span></code>; los diferentes tipos de datos R están representados en C por <code class="docutils literal notranslate"><span class="pre">SEXPTYPE</span></code>, que determina cómo se usa la información en las diversas partes de la estructura.</p>
+<p>La siguiente tabla describe los posibles valores devueltos por <code class="docutils literal notranslate"><span class="pre">typeof</span></code> y cuáles son.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Valores</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;NULL&quot;</span></code></p></td>
+<td><p>NULL</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;symbol&quot;</span></code></p></td>
+<td><p>un nombre de variable</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;pairlist&quot;</span></code></p></td>
+<td><p>un objeto pairlist (principalmente interno)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;closure&quot;</span></code></p></td>
+<td><p>una función</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;environment&quot;</span></code></p></td>
+<td><p>un medio ambiente</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;promise&quot;</span></code></p></td>
+<td><p>un objeto utilizado para implementar la evaluación diferida</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;language&quot;</span></code></p></td>
+<td><p>una construcción del lenguaje R</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;special&quot;</span></code></p></td>
+<td><p>una función interna que no evalúa sus argumentos</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;builtin&quot;</span></code></p></td>
+<td><p>una función interna que evalúa sus argumentos</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;char&quot;</span></code></p></td>
+<td><p>un objeto de cadena «escalar» (solo interno) <code class="docutils literal notranslate"><span class="pre">***</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;logical&quot;</span></code></p></td>
+<td><p>un vector que contiene valores lógicos</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;integer&quot;</span></code></p></td>
+<td><p>un vector que contiene valores enteros</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;double&quot;</span></code></p></td>
+<td><p>un vector que contiene valores reales</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;complex&quot;</span></code></p></td>
+<td><p>un vector que contiene valores complejos</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;character&quot;</span></code></p></td>
+<td><p>un vector que contiene valores de caracteres</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;...&quot;</span></code></p></td>
+<td><p>el argumento especial de longitud variable <code class="docutils literal notranslate"><span class="pre">***</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;any&quot;</span></code></p></td>
+<td><p>un tipo especial que coincide con todos los tipos: no hay objetos de este tipo</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;expression&quot;</span></code></p></td>
+<td><p>un objeto de expresión</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;list&quot;</span></code></p></td>
+<td><p>una lista código de bytes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;bytecode&quot;</span></code></p></td>
+<td><p>(solo interno) <code class="docutils literal notranslate"><span class="pre">***</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;externalptr&quot;</span></code></p></td>
+<td><p>un objeto puntero externo</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;weakref&quot;</span></code></p></td>
+<td><p>un objeto de referencia débil</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;raw&quot;</span></code></p></td>
+<td><p>un vector que contiene bytes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;S4&quot;</span></code></p></td>
+<td><p>un objeto S4 que no es un objeto simple</p></td>
+</tr>
+</tbody>
+</table>
+<p>Los usuarios no pueden obtener fácilmente objetos de los tipos marcados con un <code class="docutils literal notranslate"><span class="pre">&quot;***&quot;</span></code>.</p>
+<p>El modo de función proporciona información sobre el modo de un objeto en el sentido de Becker, Chambers &amp; Wilks (1988), y es más compatible con otras implementaciones del lenguaje S.</p>
+<p>Finalmente, la función storage.mode devuelve el modo de almacenamiento de su argumento en el sentido de Becker et al. (1988). Generalmente se usa al llamar a funciones escritas en otro lenguaje, como C o FORTRAN, para asegurar que los objetos R tengan el tipo de datos esperado por la rutina que se llama. (En el lenguaje S, los vectores con valores enteros o reales son ambos de modo <code class="docutils literal notranslate"><span class="pre">&quot;numeric&quot;</span></code>, por lo que es necesario distinguir sus modos de almacenamiento).</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">3</span>
+<span class="o">&gt;</span> <span class="nf">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;integer&quot;</span>
+<span class="o">&gt;</span> <span class="nf">mode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;numeric&quot;</span>
+<span class="o">&gt;</span> <span class="nf">storage.mode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;integer&quot;</span>
+<span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Los objetos R a menudo son coaccionados a diferentes tipos durante los cálculos. También hay muchas funciones disponibles para realizar coerción explícita. Cuando se programa en el lenguaje R, el tipo de un objeto generalmente no afecta los cálculos, sin embargo, cuando se trata de idiomas extranjeros o del sistema operativo, a menudo es necesario asegurarse de que un objeto sea del tipo correcto.</p>
+<div class="section" id="tipos-basicos">
+<h2><span class="section-number">2.1. </span>Tipos Básicos<a class="headerlink" href="#tipos-basicos" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="vectores">
+<h3><span class="section-number">2.1.1. </span>Vectores<a class="headerlink" href="#vectores" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Los vectores pueden considerarse como celdas contiguas que contienen datos. Se accede a las celdas mediante operaciones de indexación como <code class="docutils literal notranslate"><span class="pre">x[5]</span></code>. Se dan más detalles en la Sección 3.4 [Indexación], página 15.</p>
+<p>R tiene seis tipos de vectores básicos (<code class="docutils literal notranslate"><span class="pre">&quot;atomics&quot;</span></code>):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">logical</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">integer</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">real</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">complex</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">string</span></code> (o <code class="docutils literal notranslate"><span class="pre">character</span></code>) y</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">raw</span></code>.</p></li>
+</ul>
+<p>Los modos y modos de almacenamiento para los diferentes tipos de vectores se enumeran en la siguiente tabla.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 31%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" colspan="3"><p>Los modos y modos de almacenamiento</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">typeof</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mode</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">storage.mode</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">logical</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">logical</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">logical</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">integer</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">numeric</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">integer</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">double</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">numeric</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">double</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">complex</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">complex</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">complex</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">character</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">character</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">character</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">raw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">raw</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">raw</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Los números únicos, como <code class="docutils literal notranslate"><span class="pre">4.2,</span></code> y las cadenas, como <code class="docutils literal notranslate"><span class="pre">&quot;cuatro</span> <span class="pre">punto</span> <span class="pre">dos&quot;</span></code> siguen siendo vectores, de longitud 1; no hay más tipos básicos. Los vectores con longitud cero son posibles (y útiles).</p>
+<p>Los vectores de cadenas tienen modo y modo de almacenamiento <code class="docutils literal notranslate"><span class="pre">&quot;character&quot;</span></code>. Un solo elemento de un vector de caracteres a menudo se denomina <em>cadena de caracteres</em>.</p>
+</div>
+<div class="section" id="listas">
+<h3><span class="section-number">2.1.2. </span>Listas<a class="headerlink" href="#listas" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Las listas («vectores genéricos») son otro tipo de almacenamiento de datos. Las listas tienen elementos, cada uno de los cuales puede contener cualquier tipo de objeto R, es decir, los elementos de una lista no tienen que ser del mismo tipo.</p>
+<p>Se accede a los elementos de la lista a través de tres operaciones de indexación diferentes. Estos se explican en detalle en la Sección 3.4 [Indexación], página 15.</p>
+<p>Las listas son vectores y los tipos de vectores básicos se denominan <em>vectores atómicos</em> cuando es necesario excluir listas.</p>
+</div>
+<div class="section" id="objetos-de-lenguaje">
+<h3><span class="section-number">2.1.3. </span>Objetos de lenguaje<a class="headerlink" href="#objetos-de-lenguaje" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Hay tres tipos de objetos que constituyen el lenguaje R, estas son</p>
+<ul class="simple">
+<li><p><em>llamadas</em>,</p></li>
+<li><p><em>expresiones</em> y</p></li>
+<li><p><em>nombres</em>.</p></li>
+</ul>
+<p>Dado que R tiene objetos de tipo <code class="docutils literal notranslate"><span class="pre">&quot;expression&quot;</span></code>, intentaremos evitar el uso de la palabra expresión en otros contextos. En particular, las expresiones sintácticamente correctas se denominarán declaraciones.</p>
+<p>Estos objetos tienen los modos <code class="docutils literal notranslate"><span class="pre">&quot;call&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;expression&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;name&quot;</span></code>, respectivamente.</p>
+<p>Pueden crearse directamente a partir de expresiones utilizando el mecanismo de comillas y convertirse hacia y desde listas mediante las funciones <code class="docutils literal notranslate"><span class="pre">as.list</span></code> y <code class="docutils literal notranslate"><span class="pre">as.call</span></code>. Los componentes del árbol de análisis se pueden extraer mediante las operaciones de indexación estándar.</p>
+<div class="section" id="objetos-de-simbolo">
+<h4><span class="section-number">2.1.3.1. </span>Objetos de símbolo<a class="headerlink" href="#objetos-de-simbolo" title="Enlazar permanentemente con este título">¶</a></h4>
+<p>Los símbolos se refieren a objetos R. El nombre de cualquier objeto R suele ser un símbolo. Los símbolos se pueden crear a través de las funciones <code class="docutils literal notranslate"><span class="pre">as.name</span></code> y <code class="docutils literal notranslate"><span class="pre">quote</span></code>.</p>
+<p>Los símbolos tienen el modo <code class="docutils literal notranslate"><span class="pre">&quot;as.name</span></code>, el modo de almacenamiento <code class="docutils literal notranslate"><span class="pre">&quot;symbol&quot;</span></code> y el tipo <code class="docutils literal notranslate"><span class="pre">&quot;symbol&quot;</span></code>. Pueden ser coaccionados hacia y desde cadenas de caracteres usando <code class="docutils literal notranslate"><span class="pre">as.character</span></code> y <code class="docutils literal notranslate"><span class="pre">as.name</span></code>. Aparecen naturalmente como átomos de expresiones analizadas, intente, por ejemplo, <code class="docutils literal notranslate"><span class="pre">as.list(quote(x</span> <span class="pre">+</span> <span class="pre">y)).</span></code></p>
+</div>
+</div>
+<div class="section" id="objetos-de-expresion">
+<h3><span class="section-number">2.1.4. </span>Objetos de expresión<a class="headerlink" href="#objetos-de-expresion" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>En R uno puede tener objetos de tipo <code class="docutils literal notranslate"><span class="pre">&quot;expression&quot;</span></code>. Una expresión contiene una o más declaraciones. Una declaración es una colección de tokens sintácticamente correcta. Los objetos de expresión son objetos de lenguaje especial que contienen declaraciones R analizadas pero no evaluadas. La principal diferencia es que un objeto de expresión puede contener varias de estas expresiones. Otra diferencia más sutil es que los objetos de tipo <code class="docutils literal notranslate"><span class="pre">&quot;expression&quot;</span></code> solo se evalúan cuando se pasan explícitamente a <code class="docutils literal notranslate"><span class="pre">eval</span></code>, mientras que otros objetos de lenguaje pueden ser evaluados en algunos casos inesperados.</p>
+<p>Un objeto de expresión se comporta de manera muy similar a una lista y se debe acceder a sus componentes de la misma manera que a los componentes de una lista.</p>
+<p>Objetos de función</p>
+<p>En R, las funciones son objetos y pueden manipularse de la misma manera que cualquier otro objeto.</p>
+<p>Las funciones (o más precisamente, los cierres de funciones) tienen tres componentes básicos: una lista de argumentos formales, un cuerpo y un entorno. La lista de argumentos es una lista de argumentos separados por comas.</p>
+<p>Un argumento puede ser un símbolo, o una construcción <code class="docutils literal notranslate"><span class="pre">&quot;symbol</span> <span class="pre">=</span> <span class="pre">default&quot;</span></code>, o el argumento especial <code class="docutils literal notranslate"><span class="pre">...</span></code>. La segunda forma de argumento se utiliza para especificar un valor predeterminado para un argumento. Este valor se utilizará si se llama a la función sin ningún valor específico para ese argumento. El argumento <code class="docutils literal notranslate"><span class="pre">...</span></code> es especial y puede contener cualquier número de argumentos. Generalmente se usa si se desconoce el número de argumentos o en los casos en que los argumentos se pasarán a otra función.</p>
+<p>El cuerpo es una instrucción R analizada. Por lo general, es una colección de declaraciones entre llaves, pero
+puede ser una sola declaración, un símbolo o incluso una constante.</p>
+<p>El entorno de una función es el entorno que estaba activo en el momento en que se creó la función. Todos los símbolos vinculados a ese entorno se capturan y están disponibles para la función. Esta combinación del código de la función y las vinculaciones en su entorno se denomina «cierre de función», un término de la teoría de la programación funcional. En este documento generalmente usamos el término «función», pero usamos «cierre» para enfatizar la importancia del entorno adjunto.</p>
+<p>Es posible extraer y manipular las tres partes de un objeto de cierre usando construcciones <code class="docutils literal notranslate"><span class="pre">formals</span></code>, <code class="docutils literal notranslate"><span class="pre">body</span></code> y <code class="docutils literal notranslate"><span class="pre">environment</span></code> (las tres también se pueden usar en el lado izquierdo de las asignaciones). El último de estos se puede utilizar para eliminar la captura de entorno no deseada.</p>
+<p>Cuando se llama a una función, se crea un nuevo entorno (denominado entorno de evaluación), cuyo recinto (consulte la Sección 2.1.10 [Objetos de entorno], página 5) es el entorno del cierre de la función. Este nuevo entorno se llena inicialmente con los argumentos no evaluados de la función; a medida que avanza la evaluación, se crean variables locales dentro de ella.</p>
+<p>También hay una facilidad para convertir funciones hacia y desde estructuras de lista usando <code class="docutils literal notranslate"><span class="pre">as.list</span></code> y <code class="docutils literal notranslate"><span class="pre">as.function</span></code>. Estos se han incluido para proporcionar compatibilidad con S y se desaconseja su uso.</p>
+</div>
+<div class="section" id="null">
+<h3><span class="section-number">2.1.5. </span>NULL<a class="headerlink" href="#null" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Hay un objeto especial llamado <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. Se utiliza siempre que sea necesario indicar o especificar que un objeto está ausente. No debe confundirse con un vector o una lista de longitud cero.</p>
+<p>El objeto <code class="docutils literal notranslate"><span class="pre">NULL</span></code> no tiene tipo ni propiedades modificables. Solo hay un objeto <code class="docutils literal notranslate"><span class="pre">NULL</span></code> en R, al que se refieren todas las instancias. Para probar el uso <code class="docutils literal notranslate"><span class="pre">NULL</span></code> <code class="docutils literal notranslate"><span class="pre">is.null</span></code>. No puede establecer atributos en <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
+</div>
+<div class="section" id="dot-dot-dot">
+<h3><span class="section-number">2.1.6. </span>Dot-dot-dot<a class="headerlink" href="#dot-dot-dot" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El tipo de objeto  <code class="docutils literal notranslate"><span class="pre">...``se</span> <span class="pre">almacena</span> <span class="pre">como</span> <span class="pre">un</span> <span class="pre">tipo</span> <span class="pre">de</span> <span class="pre">lista</span> <span class="pre">de</span> <span class="pre">pares.</span> <span class="pre">Se</span> <span class="pre">puede</span> <span class="pre">acceder</span> <span class="pre">a</span> <span class="pre">los</span> <span class="pre">componentes</span> <span class="pre">de</span> <span class="pre">``...</span></code> de la manera habitual en pares desde el código C, pero <code class="docutils literal notranslate"><span class="pre">...</span></code> no se puede acceder fácilmente como un objeto en el código interpretado, e incluso la existencia de un objeto de este tipo normalmente no debe asumirse, ya que puede cambiar en el futuro.</p>
+<p>El objeto se puede capturar (¡con promesas forzadas!) Como una lista, por ejemplo, en la tabla uno ve</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">args</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="kc">...</span><span class="p">)</span>
+<span class="c1">## ....</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">a</span> <span class="n">in</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">## ....</span>
+</pre></div>
+</div>
+<p>Tenga en cuenta que la implementación de <code class="docutils literal notranslate"><span class="pre">...</span></code> como un objeto pairlist no debe considerarse parte de la API de R, y el código fuera de la base R no debe depender de esta descripción actual de <code class="docutils literal notranslate"><span class="pre">...</span></code>. Por otro lado, el acceso a la lista anterior (<code class="docutils literal notranslate"><span class="pre">...</span></code>), y las otras funciones de «dot-access» (acceso por puntos) <code class="docutils literal notranslate"><span class="pre">...length()</span></code> , <code class="docutils literal notranslate"><span class="pre">...elt()</span></code>, <code class="docutils literal notranslate"><span class="pre">...names()</span></code>  y <code class="docutils literal notranslate"><span class="pre">&quot;palabras</span> <span class="pre">reservadas&quot;</span></code> <code class="docutils literal notranslate"><span class="pre">..1</span></code>, <code class="docutils literal notranslate"><span class="pre">..2</span></code>, etc., consulte también la página de ayuda <code class="docutils literal notranslate"><span class="pre">?dots</span></code>, son parte de la API de R estable.</p>
+<p>Si una función tiene <code class="docutils literal notranslate"><span class="pre">...</span></code> como argumento formal, cualquier argumento real que no coincida con un argumento formal se corresponde con <code class="docutils literal notranslate"><span class="pre">...</span></code>.</p>
+</div>
+<div class="section" id="environments">
+<h3><span class="section-number">2.1.7. </span>Environments<a class="headerlink" href="#environments" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Se puede pensar que los entornos constan de dos cosas.</p>
+<ul class="simple">
+<li><p>Un marco, que consta de un conjunto de pares símbolo-valor y</p></li>
+<li><p>un recinto, un puntero a un entorno circundante.</p></li>
+</ul>
+<p>Cuando R busca el valor de un símbolo, se examina el marco y, si se encuentra un símbolo coincidente, se devolverá su valor. De lo contrario, se accede al entorno circundante y se repite el proceso.</p>
+<p>Los entornos forman una estructura de árbol en la que los recintos desempeñan el papel de padres. El árbol de entornos está enraizado en un entorno vacío, disponible a través de <code class="docutils literal notranslate"><span class="pre">emptyenv()</span></code>, que no tiene padre. Es el padre directo del entorno del paquete base (disponible a través de la función <code class="docutils literal notranslate"><span class="pre">baseenv()</span></code>).</p>
+<p>Los entornos se crean implícitamente mediante llamadas a funciones, como se describe en la Sección 2.1.5 [Objetos de función], página 4, y la Sección 3.5.2 [Entorno léxico], página 20. En este caso, el entorno contiene las variables locales de la función (incluidas los argumentos), y su recinto es el entorno de la función actualmente llamada. Los entornos también pueden ser creados directamente por new.env. Se puede acceder al contenido del marco de un entorno mediante el uso de</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ls</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">names</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[[</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get</span></code> y</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get0</span></code>,</p></li>
+</ul>
+<p>y manipulado por</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">&lt;-</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[[&lt;-</span></code>, y</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">assign</span></code>, así como <code class="docutils literal notranslate"><span class="pre">eval</span></code> y <code class="docutils literal notranslate"><span class="pre">evalq</span></code>.</p></li>
+</ul>
+<p>La función parent.env se puede utilizar para acceder al recinto de un entorno. A diferencia de la mayoría de los otros objetos de R, los entornos no se copian cuando se pasan a funciones o se utilizan en asignaciones. Por lo tanto, si asigna el mismo entorno a varios símbolos y cambia uno, los demás también cambiarán. En particular, asignar atributos a un entorno puede dar lugar a sorpresas.</p>
+</div>
+<div class="section" id="objetos-integrados-y-formas-especiales">
+<h3><span class="section-number">2.1.8. </span>Objetos integrados y formas especiales<a class="headerlink" href="#objetos-integrados-y-formas-especiales" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Estos dos tipos de objetos contienen las funciones integradas de R, es decir, aquellas que se muestran como <code class="docutils literal notranslate"><span class="pre">.Primitive</span></code> en listas de código (así como aquellas a las que se accede a través de la función <code class="docutils literal notranslate"><span class="pre">.Internal</span></code> y, por lo tanto, no visibles para el usuario como objetos). La diferencia entre los dos radica en el manejo de los argumentos. Las funciones integradas tienen todos sus argumentos evaluados y pasados ​​a la función interna, de acuerdo con la llamada por valor, mientras que las funciones especiales pasan los argumentos no evaluados a la función interna.</p>
+<p>Desde el lenguaje R, estos objetos son solo otro tipo de función. La función <code class="docutils literal notranslate"><span class="pre">is.primitive</span></code> puede distinguirlas de las funciones interpretadas.</p>
+</div>
+<div class="section" id="objetos-promesa">
+<h3><span class="section-number">2.1.9. </span>Objetos Promesa<a class="headerlink" href="#objetos-promesa" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Los objetos de promesa son parte del mecanismo de evaluación perezoso de R. Contienen tres espacios: un valor, una expresión y un entorno. Cuando se llama a una función, los argumentos coinciden y luego cada uno de los argumentos formales está vinculado a una promesa. La expresión que se proporcionó para ese argumento formal y un puntero al entorno desde el que se llamó a la función se almacenan en la promesa.</p>
+<p>Hasta que se acceda a ese argumento, no hay ningún <em>valor</em> asociado con la promesa. Cuando se accede al argumento, la expresión almacenada se evalúa en el entorno almacenado y se devuelve el resultado. El resultado también es salvado por la promesa. La función <code class="docutils literal notranslate"><span class="pre">sustitute</span></code> extraerá el contenido del espacio de expresión. Esto permite al programador acceder al valor o la expresión asociada con la promesa.</p>
+<p>Dentro del lenguaje R, los objetos de promesa casi solo se ven implícitamente: los argumentos de función reales son de este tipo. También hay una función <code class="docutils literal notranslate"><span class="pre">delayedAssign</span></code> que hará una promesa a partir de una expresión. En general, no hay forma en el código R de verificar si un objeto es una promesa o no, ni existe una forma de usar el código R para determinar el entorno de una promesa.</p>
+</div>
+<div class="section" id="objetos-pairlist">
+<h3><span class="section-number">2.1.10. </span>Objetos Pairlist<a class="headerlink" href="#objetos-pairlist" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Los objetos Pairlist son similares a las listas de pares de puntos de <code class="docutils literal notranslate"><span class="pre">Lisp</span></code>. Se utilizan ampliamente en el interior de R, pero rara vez son visibles en el código interpretado, aunque son devueltos por <code class="docutils literal notranslate"><span class="pre">formals</span></code> y pueden ser creados por (p. Ej.) La función <code class="docutils literal notranslate"><span class="pre">pairlist</span></code>. Una lista de pares de longitud cero es <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, como se esperaría en Lisp pero en contraste con una lista de longitud cero. Cada uno de estos objetos tiene tres ranuras, un valor CAR, un valor CDR y un valor TAG. El valor TAG es una cadena de texto y CAR y CDR generalmente representan, respectivamente, un elemento de lista (cabeza) y el resto (cola) de la lista con un objeto <code class="docutils literal notranslate"><span class="pre">NULL</span></code> como terminador (la terminología CAR/CDR es Lisp tradicional y originalmente se denominó los registros de dirección y decremento en una computadora IBM de principios de los 60).</p>
+<p>Los pares se manejan en el lenguaje R exactamente de la misma manera que los vectores genéricos (<code class="docutils literal notranslate"><span class="pre">&quot;lists&quot;</span></code>). En particular, se accede a los elementos utilizando la misma sintaxis <code class="docutils literal notranslate"><span class="pre">[[]]</span></code>. El uso de pairlists está desaprobado ya que los vectores genéricos suelen ser más eficientes de usar. Cuando se accede a un pairlist interno desde R, generalmente se convierte (incluso cuando está subconjunto) en un vector genérico.</p>
+<p>En muy pocos casos, los pares son visibles para el usuario: uno es <code class="docutils literal notranslate"><span class="pre">.Options</span></code>.</p>
+</div>
+<div class="section" id="el-tipo-any">
+<h3><span class="section-number">2.1.11. </span>El tipo «Any»<a class="headerlink" href="#el-tipo-any" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>No es realmente posible que un objeto sea del tipo <code class="docutils literal notranslate"><span class="pre">&quot;Any&quot;</span></code>, pero, no obstante, es un valor de tipo válido. Se utiliza en determinadas circunstancias (bastante raras), por ejemplo <code class="docutils literal notranslate"><span class="pre">as.vector(x,</span> <span class="pre">&quot;any&quot;)</span></code>, lo que indica que no se debe realizar la coerción de tipo.</p>
+</div>
+</div>
+<div class="section" id="atributos">
+<h2><span class="section-number">2.2. </span>Atributos<a class="headerlink" href="#atributos" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Todos los objetos excepto <code class="docutils literal notranslate"><span class="pre">NULL</span></code> pueden tener uno o más atributos adjuntos. Los atributos se almacenan como una lista de pares donde se nombran todos los elementos, pero deben considerarse como un conjunto de pares de <code class="docutils literal notranslate"><span class="pre">name=value</span></code>. Se puede obtener una lista de los atributos usando atributos y establecer por <code class="docutils literal notranslate"><span class="pre">attributes&lt;-</span></code>, se accede a los componentes individuales usando <code class="docutils literal notranslate"><span class="pre">attr</span></code> y <code class="docutils literal notranslate"><span class="pre">attr</span> <span class="pre">&lt;-</span></code>.</p>
+<p>Algunos atributos tienen funciones de acceso especiales (por ejemplo, <code class="docutils literal notranslate"><span class="pre">levels&lt;-</span></code> para factores) y estos deben usarse cuando estén disponibles. Además de ocultar detalles de implementación, pueden realizar operaciones adicionales. R intenta interceptar las llamadas a <code class="docutils literal notranslate"><span class="pre">attr</span> <span class="pre">&lt;-</span></code> y a los <code class="docutils literal notranslate"><span class="pre">attributes&lt;-</span></code> que involucran los atributos especiales y aplica las comprobaciones de coherencia.</p>
+<p>Las matrices y las matrices son simplemente vectores con el atributo <code class="docutils literal notranslate"><span class="pre">dim</span></code> y opcionalmente <code class="docutils literal notranslate"><span class="pre">dimnames</span></code> adjuntos al vector.</p>
+<p>Los atributos se utilizan para implementar la estructura de clases utilizada en R. Si un objeto tiene un atributo de clase, ese atributo se examinará durante la evaluación. La estructura de clases en R se describe en detalle en el Capítulo 5 [Programación orientada a objetos], página 26.</p>
+<div class="section" id="names">
+<h3><span class="section-number">2.2.1. </span>Names<a class="headerlink" href="#names" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Un atributo de <code class="docutils literal notranslate"><span class="pre">names</span></code>, cuando está presente, etiqueta los elementos individuales de un vector o lista. Cuando se imprime un objeto, el atributo <code class="docutils literal notranslate"><span class="pre">names</span></code>, cuando está presente, se utiliza para etiquetar los elementos. El atributo <code class="docutils literal notranslate"><span class="pre">names</span></code> también se puede utilizar con fines de indexación, por ejemplo, <code class="docutils literal notranslate"><span class="pre">quantile(x)[&quot;25%&quot;]</span></code>.</p>
+<p>Uno puede obtener y establecer los nombres usando <code class="docutils literal notranslate"><span class="pre">names</span></code> y construcciones de <code class="docutils literal notranslate"><span class="pre">names&lt;-</span></code>. Este último realizará las comprobaciones de coherencia necesarias para garantizar que el atributo <code class="docutils literal notranslate"><span class="pre">names</span></code> tenga el tipo y la longitud adecuada.</p>
+<p>Los grupos de parejas y las matrices unidimensionales se tratan de forma especial. Para los objetos pairlist, se utiliza un atributo <code class="docutils literal notranslate"><span class="pre">names</span></code> virtual; el atributo <code class="docutils literal notranslate"><span class="pre">names</span></code> se construye realmente a partir de las etiquetas de los componentes de la lista.</p>
+<p>Para matrices unidimensionales, el atributo <code class="docutils literal notranslate"><span class="pre">names</span></code> realmente accede a los <code class="docutils literal notranslate"><span class="pre">dimnames[[1]]</span></code>.</p>
+</div>
+<div class="section" id="dimensions">
+<h3><span class="section-number">2.2.2. </span>Dimensions<a class="headerlink" href="#dimensions" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El atributo <code class="docutils literal notranslate"><span class="pre">dim</span></code> se utiliza para implementar matrices. El contenido de la matriz se almacena en un vector en orden de columna principal y el atributo dim es un vector de números enteros que especifican las respectivas extensiones de la matriz. R asegura que la longitud del vector es el producto de las longitudes de las dimensiones. La longitud de una o más dimensiones puede ser cero.</p>
+<p>Un vector no es lo mismo que una matriz unidimensional, ya que el último tiene un atributo <code class="docutils literal notranslate"><span class="pre">dim</span></code> de longitud uno, mientras que el primero no tiene un atributo <code class="docutils literal notranslate"><span class="pre">dim</span></code>.</p>
+</div>
+<div class="section" id="dimnames">
+<h3><span class="section-number">2.2.3. </span>Dimnames<a class="headerlink" href="#dimnames" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Las matrices pueden nombrar cada dimensión por separado usando el atributo <code class="docutils literal notranslate"><span class="pre">dimnames</span></code>, que es una lista de vectores de caracteres. La lista de <code class="docutils literal notranslate"><span class="pre">dimnames</span></code> puede tener nombres que luego se usan para encabezados de extensión cuando se imprimen matrices.</p>
+</div>
+<div class="section" id="clases">
+<h3><span class="section-number">2.2.4. </span>Clases<a class="headerlink" href="#clases" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>R tiene un elaborado sistema de clases, controlado principalmente a través del atributo de clase <code class="docutils literal notranslate"><span class="pre">class</span></code>. Este atributo es un vector de caracteres que contiene la lista de clases de las que hereda un objeto. Esto forma la base de la funcionalidad de «métodos genéricos» en R.</p>
+<p>Los usuarios pueden acceder y manipular este atributo virtualmente sin restricciones. No se comprueba que un objeto contenga realmente los componentes que esperan los métodos de clase. Por lo tanto, la alteración del atributo de clase <code class="docutils literal notranslate"><span class="pre">class</span></code> debe hacerse con precaución y, cuando estén disponibles, se deben preferir funciones específicas de creación y coerción.</p>
+</div>
+<div class="section" id="time-series-attributes">
+<h3><span class="section-number">2.2.5. </span>Time series attributes<a class="headerlink" href="#time-series-attributes" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>El atributo <code class="docutils literal notranslate"><span class="pre">tsp</span></code> se utiliza para contener parámetros de series de tiempo, inicio, final y frecuencia. Esta construcción se utiliza principalmente para manejar series con subestructura periódica, como datos mensuales o trimestrales.</p>
+</div>
+<div class="section" id="copying-of-attributes">
+<h3><span class="section-number">2.2.6. </span>Copying of attributes<a class="headerlink" href="#copying-of-attributes" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Si los atributos deben copiarse cuando se modifica un objeto es un área compleja, pero existen algunas reglas generales (Becker, Chambers &amp; Wilks, 1988, pp. 144–6).</p>
+<p>Las funciones escalares (aquellas que operan elemento por elemento en un vector y cuya salida es similar a la entrada) deben preservar los atributos (excepto quizás la clase).</p>
+<p>Las operaciones binarias normalmente copian la mayoría de los atributos del argumento más largo (y si tienen la misma longitud de ambos, prefieren los valores del primero). Aquí <code class="docutils literal notranslate"><span class="pre">&quot;most&quot;</span></code> significa todos excepto los <code class="docutils literal notranslate"><span class="pre">names</span></code>, <code class="docutils literal notranslate"><span class="pre">dim</span> <span class="pre">``y</span> <span class="pre">``dimnames</span></code> que están configurados apropiadamente por el código para el operador.</p>
+<p>El subconjunto (que no sea por un índice vacío) generalmente elimina todos los atributos excepto los <code class="docutils literal notranslate"><span class="pre">names</span></code>, <code class="docutils literal notranslate"><span class="pre">dim</span> <span class="pre">``y</span> <span class="pre">``dimnames</span></code> que se restablecen según corresponda. Por otro lado, la subasignación generalmente conserva los atributos incluso si se cambia la longitud. La coerción elimina todos los atributos. El método predeterminado para ordenar elimina todos los atributos excepto los nombres, que se ordenan junto con el objeto.</p>
+</div>
+</div>
+<div class="section" id="objetos-compuestos-especiales">
+<h2><span class="section-number">2.3. </span>Objetos compuestos especiales<a class="headerlink" href="#objetos-compuestos-especiales" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="factores">
+<h3><span class="section-number">2.3.1. </span>Factores<a class="headerlink" href="#factores" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Los factores se utilizan para describir elementos que pueden tener un número fijo de valores (género, clase social, etc.). Un factor tiene un atributo de niveles <code class="docutils literal notranslate"><span class="pre">levels</span></code> y una clase <code class="docutils literal notranslate"><span class="pre">&quot;factor&quot;</span></code>. Opcionalmente, también puede contener un atributo de contrastes <code class="docutils literal notranslate"><span class="pre">contrasts</span></code> que controla la parametrización utilizada cuando el factor se utiliza en una función de modelado.</p>
+<p>Un factor puede ser puramente nominal o puede tener categorías ordenadas. En este último caso, debe desafiarse como tal y tener un vector de clase <code class="docutils literal notranslate"><span class="pre">c(&quot;ordered&quot;,&quot;</span> <span class="pre">factor&quot;)</span></code>.</p>
+<p>Los factores se implementan actualmente utilizando una matriz de enteros para especificar los niveles reales y una segunda matriz de nombres que se asignan a los números enteros. Lamentablemente, los usuarios suelen hacer uso de la implementación para facilitar algunos cálculos. Sin embargo, esto es un problema de implementación y no se garantiza que se mantenga en todas las implementaciones de R.</p>
+</div>
+<div class="section" id="objetos-dataframe">
+<h3><span class="section-number">2.3.2. </span>Objetos DataFrame<a class="headerlink" href="#objetos-dataframe" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Los marcos de datos son las estructuras R que imitan más de cerca el conjunto de datos SAS o SPSS, es decir, una matriz de datos de «casos por variables».</p>
+<p>Un marco de datos es una lista de vectores, factores y/o matrices que tienen la misma longitud (número de filas en el caso de matrices). Además, un marco de datos generalmente tiene un atributo de nombres <code class="docutils literal notranslate"><span class="pre">names</span></code> que etiqueta las variables y un atributo <code class="docutils literal notranslate"><span class="pre">row.names</span></code> para etiquetar los casos.</p>
+<p>Un marco de datos puede contener una lista de la misma longitud que los demás componentes. La lista puede contener elementos de diferentes longitudes, proporcionando así una estructura de datos para matrices irregulares.</p>
+<p>Sin embargo, al momento de escribir estas líneas, estos arreglos generalmente no se manejan correctamente.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="03-evaluacion-de-expresiones.html" class="btn btn-neutral float-right" title="3. Evaluación de expresiones" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="01-introduccion.html" class="btn btn-neutral float-left" title="1. Introducción" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Derechos de autor 2021, Ferreira, Juan David.
+
+    </p>
+  </div>
+    
+    
+    
+    Construido con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

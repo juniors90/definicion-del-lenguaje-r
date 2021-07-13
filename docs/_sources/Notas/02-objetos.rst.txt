@@ -1,0 +1,377 @@
+Objetos
+========
+
+En todos los lenguajes informáticos, las variables proporcionan un medio para acceder a los datos almacenados en la memoria. R no proporciona acceso directo a la memoria de la computadora, sino que proporciona una serie de estructuras de datos especializadas a las que nos referiremos como objetos. Se hace referencia a estos objetos mediante símbolos o variables. En R, sin embargo, los símbolos son en sí mismos objetos y pueden manipularse de la misma forma que cualquier otro objeto. Esto es diferente de muchos otros lenguajes y tiene efectos de amplio alcance.
+
+En este capítulo proporcionamos descripciones preliminares de las diversas estructuras de datos proporcionadas en R. En los capítulos siguientes se encontrarán descripciones más detalladas de muchas de ellas. La función específica R ``typeof`` devuelve el tipo de un objeto R. Tenga en cuenta que en el código C subyacente a R, todos los objetos apuntan a una estructura con typedef ``SEXPREC``; los diferentes tipos de datos R están representados en C por ``SEXPTYPE``, que determina cómo se usa la información en las diversas partes de la estructura.
+
+La siguiente tabla describe los posibles valores devueltos por ``typeof`` y cuáles son.
+
++--------------------+--------------------------------------------------------------------------------+
+| Valores            | Descripción                                                                    |
++====================+================================================================================+
+| ``"NULL"``         | NULL                                                                           |
++--------------------+--------------------------------------------------------------------------------+
+| ``"symbol"``       | un nombre de variable                                                          |
++--------------------+--------------------------------------------------------------------------------+
+| ``"pairlist"``     | un objeto pairlist (principalmente interno)                                    |
++--------------------+--------------------------------------------------------------------------------+
+| ``"closure"``      | una función                                                                    |
++--------------------+--------------------------------------------------------------------------------+
+| ``"environment"``  | un medio ambiente                                                              |
++--------------------+--------------------------------------------------------------------------------+
+| ``"promise"``      | un objeto utilizado para implementar la evaluación diferida                    |
++--------------------+--------------------------------------------------------------------------------+
+| ``"language"``     | una construcción del lenguaje R                                                |
++--------------------+--------------------------------------------------------------------------------+
+| ``"special"``      | una función interna que no evalúa sus argumentos                               |
++--------------------+--------------------------------------------------------------------------------+
+| ``"builtin"``      | una función interna que evalúa sus argumentos                                  |
++--------------------+--------------------------------------------------------------------------------+
+| ``"char"``         | un objeto de cadena "escalar" (solo interno) ``***``                           |
++--------------------+--------------------------------------------------------------------------------+
+| ``"logical"``      | un vector que contiene valores lógicos                                         |
++--------------------+--------------------------------------------------------------------------------+
+| ``"integer"``      | un vector que contiene valores enteros                                         |
++--------------------+--------------------------------------------------------------------------------+
+| ``"double"``       | un vector que contiene valores reales                                          |
++--------------------+--------------------------------------------------------------------------------+
+| ``"complex"``      | un vector que contiene valores complejos                                       |
++--------------------+--------------------------------------------------------------------------------+
+| ``"character"``    | un vector que contiene valores de caracteres                                   |
++--------------------+--------------------------------------------------------------------------------+
+| ``"..."``          | el argumento especial de longitud variable ``***``                             |
++--------------------+--------------------------------------------------------------------------------+
+| ``"any"``          | un tipo especial que coincide con todos los tipos: no hay objetos de este tipo |
++--------------------+--------------------------------------------------------------------------------+
+| ``"expression"``   | un objeto de expresión                                                         |
++--------------------+--------------------------------------------------------------------------------+
+| ``"list"``         | una lista código de bytes                                                      |
++--------------------+--------------------------------------------------------------------------------+
+| ``"bytecode"``     | (solo interno) ``***``                                                         |
++--------------------+--------------------------------------------------------------------------------+
+| ``"externalptr"``  | un objeto puntero externo                                                      |
++--------------------+--------------------------------------------------------------------------------+
+| ``"weakref"``      | un objeto de referencia débil                                                  |
++--------------------+--------------------------------------------------------------------------------+
+| ``"raw"``          | un vector que contiene bytes                                                   |
++--------------------+--------------------------------------------------------------------------------+
+| ``"S4"``           | un objeto S4 que no es un objeto simple                                        |
++--------------------+--------------------------------------------------------------------------------+
+
+
+Los usuarios no pueden obtener fácilmente objetos de los tipos marcados con un ``"***"``.
+
+El modo de función proporciona información sobre el modo de un objeto en el sentido de Becker, Chambers & Wilks (1988), y es más compatible con otras implementaciones del lenguaje S.
+
+Finalmente, la función storage.mode devuelve el modo de almacenamiento de su argumento en el sentido de Becker et al. (1988). Generalmente se usa al llamar a funciones escritas en otro lenguaje, como C o FORTRAN, para asegurar que los objetos R tengan el tipo de datos esperado por la rutina que se llama. (En el lenguaje S, los vectores con valores enteros o reales son ambos de modo ``"numeric"``, por lo que es necesario distinguir sus modos de almacenamiento).
+
+.. code-block:: R
+
+    > x <- 1:3
+    > typeof(x)
+    [1] "integer"
+    > mode(x)
+    [1] "numeric"
+    > storage.mode(x)
+    [1] "integer"
+    > 
+
+Los objetos R a menudo son coaccionados a diferentes tipos durante los cálculos. También hay muchas funciones disponibles para realizar coerción explícita. Cuando se programa en el lenguaje R, el tipo de un objeto generalmente no afecta los cálculos, sin embargo, cuando se trata de idiomas extranjeros o del sistema operativo, a menudo es necesario asegurarse de que un objeto sea del tipo correcto.
+
+Tipos Básicos
+--------------------
+
+Vectores
+~~~~~~~~~~
+
+Los vectores pueden considerarse como celdas contiguas que contienen datos. Se accede a las celdas mediante operaciones de indexación como ``x[5]``. Se dan más detalles en la Sección 3.4 [Indexación], página 15.
+
+R tiene seis tipos de vectores básicos (``"atomics"``):
+
+- ``logical``,
+
+- ``integer``,
+
+- ``real``,
+
+- ``complex``,
+
+- ``string`` (o ``character``) y
+
+- ``raw``.
+
+Los modos y modos de almacenamiento para los diferentes tipos de vectores se enumeran en la siguiente tabla. 
+
+
++---------------+----------------+---------------------+
+| Los modos y modos de almacenamiento                  |
++===============+================+=====================+
+| ``typeof``    | ``mode``       | ``storage.mode``    |
++---------------+----------------+---------------------+
+| ``logical``   | ``logical``    | ``logical``         |
++---------------+----------------+---------------------+
+| ``integer``   | ``numeric``    | ``integer``         |
++---------------+----------------+---------------------+
+| ``double``    | ``numeric``    | ``double``          |
++---------------+----------------+---------------------+
+| ``complex``   | ``complex``    | ``complex``         |
++---------------+----------------+---------------------+
+| ``character`` | ``character``  | ``character``       |
++---------------+----------------+---------------------+
+| ``raw``       | ``raw``        | ``raw``             |
++---------------+----------------+---------------------+
+
+
+Los números únicos, como ``4.2,`` y las cadenas, como ``"cuatro punto dos"`` siguen siendo vectores, de longitud 1; no hay más tipos básicos. Los vectores con longitud cero son posibles (y útiles).
+
+Los vectores de cadenas tienen modo y modo de almacenamiento ``"character"``. Un solo elemento de un vector de caracteres a menudo se denomina *cadena de caracteres*.
+
+Listas
+~~~~~~~
+
+Las listas ("vectores genéricos") son otro tipo de almacenamiento de datos. Las listas tienen elementos, cada uno de los cuales puede contener cualquier tipo de objeto R, es decir, los elementos de una lista no tienen que ser del mismo tipo.
+
+Se accede a los elementos de la lista a través de tres operaciones de indexación diferentes. Estos se explican en detalle en la Sección 3.4 [Indexación], página 15.
+
+Las listas son vectores y los tipos de vectores básicos se denominan *vectores atómicos* cuando es necesario excluir listas.
+
+Objetos de lenguaje
+~~~~~~~~~~~~~~~~~~~
+
+Hay tres tipos de objetos que constituyen el lenguaje R, estas son
+
+- *llamadas*,
+
+- *expresiones* y
+
+- *nombres*.
+
+Dado que R tiene objetos de tipo ``"expression"``, intentaremos evitar el uso de la palabra expresión en otros contextos. En particular, las expresiones sintácticamente correctas se denominarán declaraciones.
+
+Estos objetos tienen los modos ``"call"``, ``"expression"``, and ``"name"``, respectivamente.
+
+Pueden crearse directamente a partir de expresiones utilizando el mecanismo de comillas y convertirse hacia y desde listas mediante las funciones ``as.list`` y ``as.call``. Los componentes del árbol de análisis se pueden extraer mediante las operaciones de indexación estándar.
+
+Objetos de símbolo
+```````````````````
+
+Los símbolos se refieren a objetos R. El nombre de cualquier objeto R suele ser un símbolo. Los símbolos se pueden crear a través de las funciones ``as.name`` y ``quote``.
+
+Los símbolos tienen el modo ``"as.name``, el modo de almacenamiento ``"symbol"`` y el tipo ``"symbol"``. Pueden ser coaccionados hacia y desde cadenas de caracteres usando ``as.character`` y ``as.name``. Aparecen naturalmente como átomos de expresiones analizadas, intente, por ejemplo, ``as.list(quote(x + y)).``
+
+Objetos de expresión
+~~~~~~~~~~~~~~~~~~~~~
+
+En R uno puede tener objetos de tipo ``"expression"``. Una expresión contiene una o más declaraciones. Una declaración es una colección de tokens sintácticamente correcta. Los objetos de expresión son objetos de lenguaje especial que contienen declaraciones R analizadas pero no evaluadas. La principal diferencia es que un objeto de expresión puede contener varias de estas expresiones. Otra diferencia más sutil es que los objetos de tipo ``"expression"`` solo se evalúan cuando se pasan explícitamente a ``eval``, mientras que otros objetos de lenguaje pueden ser evaluados en algunos casos inesperados.
+
+Un objeto de expresión se comporta de manera muy similar a una lista y se debe acceder a sus componentes de la misma manera que a los componentes de una lista.
+
+Objetos de función
+
+En R, las funciones son objetos y pueden manipularse de la misma manera que cualquier otro objeto.
+
+Las funciones (o más precisamente, los cierres de funciones) tienen tres componentes básicos: una lista de argumentos formales, un cuerpo y un entorno. La lista de argumentos es una lista de argumentos separados por comas.
+
+Un argumento puede ser un símbolo, o una construcción ``"symbol = default"``, o el argumento especial ``...``. La segunda forma de argumento se utiliza para especificar un valor predeterminado para un argumento. Este valor se utilizará si se llama a la función sin ningún valor específico para ese argumento. El argumento ``...`` es especial y puede contener cualquier número de argumentos. Generalmente se usa si se desconoce el número de argumentos o en los casos en que los argumentos se pasarán a otra función.
+
+El cuerpo es una instrucción R analizada. Por lo general, es una colección de declaraciones entre llaves, pero
+puede ser una sola declaración, un símbolo o incluso una constante.
+
+El entorno de una función es el entorno que estaba activo en el momento en que se creó la función. Todos los símbolos vinculados a ese entorno se capturan y están disponibles para la función. Esta combinación del código de la función y las vinculaciones en su entorno se denomina "cierre de función", un término de la teoría de la programación funcional. En este documento generalmente usamos el término "función", pero usamos "cierre" para enfatizar la importancia del entorno adjunto.
+
+Es posible extraer y manipular las tres partes de un objeto de cierre usando construcciones ``formals``, ``body`` y ``environment`` (las tres también se pueden usar en el lado izquierdo de las asignaciones). El último de estos se puede utilizar para eliminar la captura de entorno no deseada.
+
+Cuando se llama a una función, se crea un nuevo entorno (denominado entorno de evaluación), cuyo recinto (consulte la Sección 2.1.10 [Objetos de entorno], página 5) es el entorno del cierre de la función. Este nuevo entorno se llena inicialmente con los argumentos no evaluados de la función; a medida que avanza la evaluación, se crean variables locales dentro de ella.
+
+También hay una facilidad para convertir funciones hacia y desde estructuras de lista usando ``as.list`` y ``as.function``. Estos se han incluido para proporcionar compatibilidad con S y se desaconseja su uso.
+
+NULL
+~~~~~~~~
+
+Hay un objeto especial llamado ``NULL``. Se utiliza siempre que sea necesario indicar o especificar que un objeto está ausente. No debe confundirse con un vector o una lista de longitud cero.
+
+El objeto ``NULL`` no tiene tipo ni propiedades modificables. Solo hay un objeto ``NULL`` en R, al que se refieren todas las instancias. Para probar el uso ``NULL`` ``is.null``. No puede establecer atributos en ``NULL``.
+
+
+Dot-dot-dot
+~~~~~~~~~~~~
+
+El tipo de objeto  ``...``se almacena como un tipo de lista de pares. Se puede acceder a los componentes de ``...`` de la manera habitual en pares desde el código C, pero ``...`` no se puede acceder fácilmente como un objeto en el código interpretado, e incluso la existencia de un objeto de este tipo normalmente no debe asumirse, ya que puede cambiar en el futuro.
+
+El objeto se puede capturar (¡con promesas forzadas!) Como una lista, por ejemplo, en la tabla uno ve
+
+.. code-block:: R
+    
+    args <- list(...)
+    ## ....
+    for (a in args) {
+    ## ....
+
+Tenga en cuenta que la implementación de ``...`` como un objeto pairlist no debe considerarse parte de la API de R, y el código fuera de la base R no debe depender de esta descripción actual de ``...``. Por otro lado, el acceso a la lista anterior (``...``), y las otras funciones de "dot-access" (acceso por puntos) ``...length()`` , ``...elt()``, ``...names()``  y ``"palabras reservadas"`` ``..1``, ``..2``, etc., consulte también la página de ayuda ``?dots``, son parte de la API de R estable.
+
+Si una función tiene ``...`` como argumento formal, cualquier argumento real que no coincida con un argumento formal se corresponde con ``...``.
+
+
+Environments
+~~~~~~~~~~~~~
+
+Se puede pensar que los entornos constan de dos cosas.
+
+- Un marco, que consta de un conjunto de pares símbolo-valor y
+
+- un recinto, un puntero a un entorno circundante.
+
+Cuando R busca el valor de un símbolo, se examina el marco y, si se encuentra un símbolo coincidente, se devolverá su valor. De lo contrario, se accede al entorno circundante y se repite el proceso.
+
+Los entornos forman una estructura de árbol en la que los recintos desempeñan el papel de padres. El árbol de entornos está enraizado en un entorno vacío, disponible a través de ``emptyenv()``, que no tiene padre. Es el padre directo del entorno del paquete base (disponible a través de la función ``baseenv()``).
+
+Los entornos se crean implícitamente mediante llamadas a funciones, como se describe en la Sección 2.1.5 [Objetos de función], página 4, y la Sección 3.5.2 [Entorno léxico], página 20. En este caso, el entorno contiene las variables locales de la función (incluidas los argumentos), y su recinto es el entorno de la función actualmente llamada. Los entornos también pueden ser creados directamente por new.env. Se puede acceder al contenido del marco de un entorno mediante el uso de
+
+- ``ls``,
+
+- ``names``,
+
+- ``$``,
+
+- ``[``,
+
+- ``[[``,
+
+- ``get`` y
+
+- ``get0``,
+
+y manipulado por
+
+- ``$ <-``,
+
+- ``[[<-``, y
+
+- ``assign``, así como ``eval`` y ``evalq``.
+
+La función parent.env se puede utilizar para acceder al recinto de un entorno. A diferencia de la mayoría de los otros objetos de R, los entornos no se copian cuando se pasan a funciones o se utilizan en asignaciones. Por lo tanto, si asigna el mismo entorno a varios símbolos y cambia uno, los demás también cambiarán. En particular, asignar atributos a un entorno puede dar lugar a sorpresas.
+
+
+Objetos integrados y formas especiales
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Estos dos tipos de objetos contienen las funciones integradas de R, es decir, aquellas que se muestran como ``.Primitive`` en listas de código (así como aquellas a las que se accede a través de la función ``.Internal`` y, por lo tanto, no visibles para el usuario como objetos). La diferencia entre los dos radica en el manejo de los argumentos. Las funciones integradas tienen todos sus argumentos evaluados y pasados ​​a la función interna, de acuerdo con la llamada por valor, mientras que las funciones especiales pasan los argumentos no evaluados a la función interna.
+
+Desde el lenguaje R, estos objetos son solo otro tipo de función. La función ``is.primitive`` puede distinguirlas de las funciones interpretadas.
+
+Objetos Promesa
+~~~~~~~~~~~~~~~~~
+
+
+Los objetos de promesa son parte del mecanismo de evaluación perezoso de R. Contienen tres espacios: un valor, una expresión y un entorno. Cuando se llama a una función, los argumentos coinciden y luego cada uno de los argumentos formales está vinculado a una promesa. La expresión que se proporcionó para ese argumento formal y un puntero al entorno desde el que se llamó a la función se almacenan en la promesa.
+
+Hasta que se acceda a ese argumento, no hay ningún *valor* asociado con la promesa. Cuando se accede al argumento, la expresión almacenada se evalúa en el entorno almacenado y se devuelve el resultado. El resultado también es salvado por la promesa. La función ``sustitute`` extraerá el contenido del espacio de expresión. Esto permite al programador acceder al valor o la expresión asociada con la promesa.
+
+Dentro del lenguaje R, los objetos de promesa casi solo se ven implícitamente: los argumentos de función reales son de este tipo. También hay una función ``delayedAssign`` que hará una promesa a partir de una expresión. En general, no hay forma en el código R de verificar si un objeto es una promesa o no, ni existe una forma de usar el código R para determinar el entorno de una promesa.
+
+
+
+Objetos Pairlist
+~~~~~~~~~~~~~~~~~~
+
+Los objetos Pairlist son similares a las listas de pares de puntos de ``Lisp``. Se utilizan ampliamente en el interior de R, pero rara vez son visibles en el código interpretado, aunque son devueltos por ``formals`` y pueden ser creados por (p. Ej.) La función ``pairlist``. Una lista de pares de longitud cero es ``NULL``, como se esperaría en Lisp pero en contraste con una lista de longitud cero. Cada uno de estos objetos tiene tres ranuras, un valor CAR, un valor CDR y un valor TAG. El valor TAG es una cadena de texto y CAR y CDR generalmente representan, respectivamente, un elemento de lista (cabeza) y el resto (cola) de la lista con un objeto ``NULL`` como terminador (la terminología CAR/CDR es Lisp tradicional y originalmente se denominó los registros de dirección y decremento en una computadora IBM de principios de los 60).
+
+Los pares se manejan en el lenguaje R exactamente de la misma manera que los vectores genéricos (``"lists"``). En particular, se accede a los elementos utilizando la misma sintaxis ``[[]]``. El uso de pairlists está desaprobado ya que los vectores genéricos suelen ser más eficientes de usar. Cuando se accede a un pairlist interno desde R, generalmente se convierte (incluso cuando está subconjunto) en un vector genérico.
+
+En muy pocos casos, los pares son visibles para el usuario: uno es ``.Options``.
+
+
+
+El tipo "Any"
+~~~~~~~~~~~~~~
+
+No es realmente posible que un objeto sea del tipo ``"Any"``, pero, no obstante, es un valor de tipo válido. Se utiliza en determinadas circunstancias (bastante raras), por ejemplo ``as.vector(x, "any")``, lo que indica que no se debe realizar la coerción de tipo.
+
+
+Atributos
+-------------
+
+
+Todos los objetos excepto ``NULL`` pueden tener uno o más atributos adjuntos. Los atributos se almacenan como una lista de pares donde se nombran todos los elementos, pero deben considerarse como un conjunto de pares de ``name=value``. Se puede obtener una lista de los atributos usando atributos y establecer por ``attributes<-``, se accede a los componentes individuales usando ``attr`` y ``attr <-``.
+
+Algunos atributos tienen funciones de acceso especiales (por ejemplo, ``levels<-`` para factores) y estos deben usarse cuando estén disponibles. Además de ocultar detalles de implementación, pueden realizar operaciones adicionales. R intenta interceptar las llamadas a ``attr <-`` y a los ``attributes<-`` que involucran los atributos especiales y aplica las comprobaciones de coherencia.
+
+Las matrices y las matrices son simplemente vectores con el atributo ``dim`` y opcionalmente ``dimnames`` adjuntos al vector.
+
+Los atributos se utilizan para implementar la estructura de clases utilizada en R. Si un objeto tiene un atributo de clase, ese atributo se examinará durante la evaluación. La estructura de clases en R se describe en detalle en el Capítulo 5 [Programación orientada a objetos], página 26.
+
+Names
+~~~~~~~~
+
+Un atributo de ``names``, cuando está presente, etiqueta los elementos individuales de un vector o lista. Cuando se imprime un objeto, el atributo ``names``, cuando está presente, se utiliza para etiquetar los elementos. El atributo ``names`` también se puede utilizar con fines de indexación, por ejemplo, ``quantile(x)["25%"]``.
+
+Uno puede obtener y establecer los nombres usando ``names`` y construcciones de ``names<-``. Este último realizará las comprobaciones de coherencia necesarias para garantizar que el atributo ``names`` tenga el tipo y la longitud adecuada.
+
+Los grupos de parejas y las matrices unidimensionales se tratan de forma especial. Para los objetos pairlist, se utiliza un atributo ``names`` virtual; el atributo ``names`` se construye realmente a partir de las etiquetas de los componentes de la lista.
+
+Para matrices unidimensionales, el atributo ``names`` realmente accede a los ``dimnames[[1]]``.
+
+Dimensions
+~~~~~~~~~~~~
+
+El atributo ``dim`` se utiliza para implementar matrices. El contenido de la matriz se almacena en un vector en orden de columna principal y el atributo dim es un vector de números enteros que especifican las respectivas extensiones de la matriz. R asegura que la longitud del vector es el producto de las longitudes de las dimensiones. La longitud de una o más dimensiones puede ser cero.
+
+Un vector no es lo mismo que una matriz unidimensional, ya que el último tiene un atributo ``dim`` de longitud uno, mientras que el primero no tiene un atributo ``dim``.
+
+Dimnames
+~~~~~~~~~~~
+
+Las matrices pueden nombrar cada dimensión por separado usando el atributo ``dimnames``, que es una lista de vectores de caracteres. La lista de ``dimnames`` puede tener nombres que luego se usan para encabezados de extensión cuando se imprimen matrices.
+
+Clases
+~~~~~~~~~~
+
+R tiene un elaborado sistema de clases, controlado principalmente a través del atributo de clase ``class``. Este atributo es un vector de caracteres que contiene la lista de clases de las que hereda un objeto. Esto forma la base de la funcionalidad de "métodos genéricos" en R.
+
+Los usuarios pueden acceder y manipular este atributo virtualmente sin restricciones. No se comprueba que un objeto contenga realmente los componentes que esperan los métodos de clase. Por lo tanto, la alteración del atributo de clase ``class`` debe hacerse con precaución y, cuando estén disponibles, se deben preferir funciones específicas de creación y coerción.
+
+Time series attributes
+~~~~~~~~~~~~~~~~~~~~~~~
+
+El atributo ``tsp`` se utiliza para contener parámetros de series de tiempo, inicio, final y frecuencia. Esta construcción se utiliza principalmente para manejar series con subestructura periódica, como datos mensuales o trimestrales.
+
+Copying of attributes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Si los atributos deben copiarse cuando se modifica un objeto es un área compleja, pero existen algunas reglas generales (Becker, Chambers & Wilks, 1988, pp. 144–6).
+
+Las funciones escalares (aquellas que operan elemento por elemento en un vector y cuya salida es similar a la entrada) deben preservar los atributos (excepto quizás la clase).
+
+.. en realidad dos, pero este manual preliminar es anterior al paquete de métodos.
+
+Las operaciones binarias normalmente copian la mayoría de los atributos del argumento más largo (y si tienen la misma longitud de ambos, prefieren los valores del primero). Aquí ``"most"`` significa todos excepto los ``names``, ``dim ``y ``dimnames`` que están configurados apropiadamente por el código para el operador.
+
+El subconjunto (que no sea por un índice vacío) generalmente elimina todos los atributos excepto los ``names``, ``dim ``y ``dimnames`` que se restablecen según corresponda. Por otro lado, la subasignación generalmente conserva los atributos incluso si se cambia la longitud. La coerción elimina todos los atributos. El método predeterminado para ordenar elimina todos los atributos excepto los nombres, que se ordenan junto con el objeto.
+
+
+
+
+
+Objetos compuestos especiales
+--------------------------------------------------------------------------------
+
+Factores
+~~~~~~~~~
+
+Los factores se utilizan para describir elementos que pueden tener un número fijo de valores (género, clase social, etc.). Un factor tiene un atributo de niveles ``levels`` y una clase ``"factor"``. Opcionalmente, también puede contener un atributo de contrastes ``contrasts`` que controla la parametrización utilizada cuando el factor se utiliza en una función de modelado.
+
+Un factor puede ser puramente nominal o puede tener categorías ordenadas. En este último caso, debe desafiarse como tal y tener un vector de clase ``c("ordered"," factor")``.
+
+Los factores se implementan actualmente utilizando una matriz de enteros para especificar los niveles reales y una segunda matriz de nombres que se asignan a los números enteros. Lamentablemente, los usuarios suelen hacer uso de la implementación para facilitar algunos cálculos. Sin embargo, esto es un problema de implementación y no se garantiza que se mantenga en todas las implementaciones de R.
+
+Objetos DataFrame
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Los marcos de datos son las estructuras R que imitan más de cerca el conjunto de datos SAS o SPSS, es decir, una matriz de datos de "casos por variables".
+
+Un marco de datos es una lista de vectores, factores y/o matrices que tienen la misma longitud (número de filas en el caso de matrices). Además, un marco de datos generalmente tiene un atributo de nombres ``names`` que etiqueta las variables y un atributo ``row.names`` para etiquetar los casos.
+
+Un marco de datos puede contener una lista de la misma longitud que los demás componentes. La lista puede contener elementos de diferentes longitudes, proporcionando así una estructura de datos para matrices irregulares.
+
+Sin embargo, al momento de escribir estas líneas, estos arreglos generalmente no se manejan correctamente.

@@ -1,0 +1,38 @@
+Manejo de excepciones
+======================
+
+Las facilidades de manejo de excepciones en R se proporcionan a través de dos mecanismos. Las funciones como detener o advertir se pueden llamar directamente o se pueden usar opciones como "advertir" para controlar el manejo de problemas.
+
+stop
+~~~~~~
+
+Una llamada a ``stop`` detiene la evaluación de la expresión actual, imprime el argumento del mensaje y devuelve la ejecución al nivel superior.
+
+warning
+~~~~~~~~~~~~
+
+La función ``warning`` toma un solo argumento que es una cadena de caracteres. El comportamiento de una llamada a ``warning`` depende del valor de la opción ``"warn"``. Si ``warn`` es negativo, se ignoran las advertencias. Si es cero, se almacenan e imprimen una vez finalizada la función de nivel superior. Si es uno, se imprimen a medida que ocurren y si es 2 (o más) las advertencias se convierten en errores.
+
+Si ``"warn"`` es cero (el valor predeterminado), se crea una variable last.warning y los mensajes asociados con cada llamada a ``warning`` se almacenan, secuencialmente, en este vector. Si hay menos de 10 advertencias, se imprimen después de que la función haya terminado de evaluar. Si hay más de 10, se imprime un mensaje que indica cuántas advertencias se produjeron. En cualquier caso, ``last.warning`` contiene el vector de mensajes y ``warnings`` proporciona una forma de acceder e imprimirlo.
+
+on.exit
+~~~~~~~~~~
+
+Una función puede insertar una llamada a ``on.exit`` en cualquier punto del cuerpo de una función. El efecto de una llamada a ``on.exit`` es almacenar el valor del cuerpo para que se ejecute cuando la función salga. Esto permite que la función cambie algunos parámetros del sistema y se asegure de que se restablezcan a los valores adecuados cuando finalice la función. Se garantiza que ``on.exit`` se ejecutará cuando la función salga, ya sea directamente o como resultado de una advertencia.
+
+Un error en la evaluación del código ``on.exit`` provoca un salto inmediato al nivel superior sin más procesamiento del código ``on.exit``. ``on.exit`` toma un solo argumento que es una expresión que se evaluará cuando se sale de la función.
+
+Opciones de error
+~~~~~~~~~~~~~~~~~~~
+
+Hay una serie de variables de ``options`` que se pueden usar para controlar cómo R maneja los errores y las advertencias. Se enumeran en la tabla siguiente.
+
+``"warn"`` Controla la impresión de advertencias.
+
+``"Warning.expression"`` Establece una expresión que se evaluará cuando se produzca una advertencia. La impresión normal de advertencias se suprime si se establece esta opción.
+
+``'error'`` Instala una expresión que se evaluará cuando ocurra un error. La impresión normal de mensajes de error y mensajes de advertencia precede a la evaluación de la expresión.
+
+Las expresiones instaladas por ``options("error")`` se evalúan antes de que se lleven a cabo las llamadas a ``on.exit``.
+
+Se pueden usar ``options(error = expression(q("yes")))`` para hacer que R salga cuando se ha señalado un error. En este caso, un error hará que R se apague y se guardará el entorno global.

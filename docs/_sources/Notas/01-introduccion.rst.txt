@@ -1,0 +1,18 @@
+Introducción
+==============
+
+R es un sistema de cálculo estadístico y gráficos. Proporciona, entre otras cosas, un lenguaje de programación, gráficos de alto nivel, interfaces a otros lenguajes y facilidades de depuración. Este manual detalla y desafía el lenguaje R.
+
+El lenguaje R es un dialecto de S que fue diseñado en la década de 1980 y ha sido de uso generalizado en la comunidad estadística desde entonces. Su diseñador principal, John M. C hambers, recibió el premio ACM Software Systems Award de 1998 por S.
+
+La sintaxis del lenguaje tiene una similitud superior con C, pero la semántica es de la variedad FPL (lenguaje de programación funcional) con afinidades más fuertes con Lisp y APL. En particular, permite “computar sobre el lenguaje”, lo que a su vez permite escribir funciones que toman expresiones como entrada, algo que suele ser útil para modelado estadístico y gráficos.
+
+Es posible llegar bastante lejos usando R de forma interactiva, ejecutando expresiones simples desde la línea de comandos. Es posible que algunos usuarios nunca necesiten ir más allá de ese nivel, otros querrán escribir sus propias funciones ya sea de forma ad hoc para sistematizar el trabajo repetitivo o con la perspectiva de escribir paquetes de complementos para nuevas funcionalidades.
+
+El propósito de este manual es documentar el idioma en sí. Es decir, los objetos sobre los que trabaja y los detalles del proceso de evaluación de expresiones, que es útil conocer a la hora de programar funciones R. Los subsistemas principales para tareas específicas, como gráficos, se describen brevemente en este manual y se documentarán por separado.
+
+Aunque gran parte del texto se aplicará igualmente a S, también hay algunas diferencias sustanciales y, para no confundir el tema, nos concentraremos en describir R.
+
+El diseño del lenguaje contiene una serie de puntos críticos y errores comunes que pueden sorprender al usuario. La mayoría de ellos se deben a consideraciones de coherencia a un nivel más profundo, como explicaremos. También hay una serie de atajos y modismos útiles, que permiten al usuario expresar operaciones bastante complicadas de manera sucinta. Muchos de estos se vuelven naturales una vez que uno se familiariza con los conceptos subyacentes. En algunos casos, hay varias formas de realizar una tarea, pero algunas de las técnicas dependerán de la implementación del lenguaje y otras funcionan a un nivel más alto de abstracción. En tales casos, indicaremos el uso preferido.
+
+Se asume cierta familiaridad con R. Esta no es una introducción a R, sino un manual de referencia para programadores. Otros manuales brindan información complementaria: en particular, la Sección “Prefacio” en Introducción a R proporciona una introducción a R y la Sección “Interfaces del sistema y de lengua extranjera” en Escribir extensiones de R detalla cómo extender R usando código compilado.
